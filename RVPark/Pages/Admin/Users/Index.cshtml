@@ -1,5 +1,5 @@
 ﻿@page
-@model FoodDelivery.Pages.Admin.Users.IndexModel
+@model RVPark.Pages.Admin.Users.IndexModel
 @{
 }
 
@@ -72,7 +72,7 @@
                             </form>
                         </td>
                         <td>
-                            <a class="btn btn-outline-success" asp-page="/Admin/Users/Update" asp-route-id="@user.Id">Update</a>
+                            <a class="btn btn-outline-success" asp-page="/Admin/Users/Upsert" asp-route-id="@user.Id">Update</a>
                        
                         </td>
                     </tr>
