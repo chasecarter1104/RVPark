@@ -11,3 +11,16 @@ C:\Users\Calvin Oats\Documents\Test_RV\ApplicationCore\obj\Debug\net9.0\Applicat
 C:\Users\Calvin Oats\Documents\Test_RV\ApplicationCore\obj\Debug\net9.0\refint\ApplicationCore.dll
 C:\Users\Calvin Oats\Documents\Test_RV\ApplicationCore\obj\Debug\net9.0\ApplicationCore.pdb
 C:\Users\Calvin Oats\Documents\Test_RV\ApplicationCore\obj\Debug\net9.0\ref\ApplicationCore.dll
+C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\bin\Debug\net9.0\ApplicationCore.deps.json
+C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\bin\Debug\net9.0\ApplicationCore.dll
+C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\bin\Debug\net9.0\ApplicationCore.pdb
+C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\obj\Debug\net9.0\ApplicationCore.csproj.AssemblyReference.cache
+C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\obj\Debug\net9.0\ApplicationCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\obj\Debug\net9.0\ApplicationCore.AssemblyInfoInputs.cache
+C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\obj\Debug\net9.0\ApplicationCore.AssemblyInfo.cs
+C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\obj\Debug\net9.0\ApplicationCore.csproj.CoreCompileInputs.cache
+C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\obj\Debug\net9.0\ApplicationCore.sourcelink.json
+C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\obj\Debug\net9.0\ApplicationCore.dll
+C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\obj\Debug\net9.0\refint\ApplicationCore.dll
+C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\obj\Debug\net9.0\ApplicationCore.pdb
+C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\obj\Debug\net9.0\ref\ApplicationCore.dll
