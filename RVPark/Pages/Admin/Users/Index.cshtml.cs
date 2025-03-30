@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace FoodDelivery.Pages.Admin.Users
+namespace RVPark.Pages.Admin.Users
 {
     public class IndexModel : PageModel
     {
