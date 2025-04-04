@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tazel\\Source\\Repos\\RVPark\\RVPark\\RVPark.csproj": {}
+    "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\RVPark\\RVPark.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tazel\\Source\\Repos\\RVPark\\ApplicationCore\\ApplicationCore.csproj": {
+    "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\ApplicationCore\\ApplicationCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tazel\\Source\\Repos\\RVPark\\ApplicationCore\\ApplicationCore.csproj",
+        "projectUniqueName": "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\ApplicationCore\\ApplicationCore.csproj",
         "projectName": "ApplicationCore",
-        "projectPath": "C:\\Users\\tazel\\Source\\Repos\\RVPark\\ApplicationCore\\ApplicationCore.csproj",
-        "packagesPath": "C:\\Users\\tazel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tazel\\Source\\Repos\\RVPark\\ApplicationCore\\obj\\",
+        "projectPath": "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\ApplicationCore\\ApplicationCore.csproj",
+        "packagesPath": "C:\\Users\\Calvin Oats\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\ApplicationCore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\tazel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Calvin Oats\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -76,20 +75,20 @@
         }
       }
     },
-    "C:\\Users\\tazel\\Source\\Repos\\RVPark\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tazel\\Source\\Repos\\RVPark\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\tazel\\Source\\Repos\\RVPark\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\tazel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tazel\\Source\\Repos\\RVPark\\Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Calvin Oats\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\tazel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Calvin Oats\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -98,15 +97,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\tazel\\Source\\Repos\\RVPark\\ApplicationCore\\ApplicationCore.csproj": {
-                "projectPath": "C:\\Users\\tazel\\Source\\Repos\\RVPark\\ApplicationCore\\ApplicationCore.csproj"
+              "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\ApplicationCore\\ApplicationCore.csproj": {
+                "projectPath": "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\ApplicationCore\\ApplicationCore.csproj"
               }
             }
           }
@@ -164,20 +162,20 @@
         }
       }
     },
-    "C:\\Users\\tazel\\Source\\Repos\\RVPark\\RVPark\\RVPark.csproj": {
+    "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\RVPark\\RVPark.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tazel\\Source\\Repos\\RVPark\\RVPark\\RVPark.csproj",
+        "projectUniqueName": "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\RVPark\\RVPark.csproj",
         "projectName": "RVPark",
-        "projectPath": "C:\\Users\\tazel\\Source\\Repos\\RVPark\\RVPark\\RVPark.csproj",
-        "packagesPath": "C:\\Users\\tazel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tazel\\Source\\Repos\\RVPark\\RVPark\\obj\\",
+        "projectPath": "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\RVPark\\RVPark.csproj",
+        "packagesPath": "C:\\Users\\Calvin Oats\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\RVPark\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\tazel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Calvin Oats\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -186,15 +184,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\tazel\\Source\\Repos\\RVPark\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\tazel\\Source\\Repos\\RVPark\\Infrastructure\\Infrastructure.csproj"
+              "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Calvin Oats\\source\\repos\\RV_Park\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
