@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="IIS Web Application Name" description="" value="corpoverlords-001-site1" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Calvin\ Oats\\Documents\\Test_RV\\RVPark\\obj\\Release\\net9\.0\\PubTmp\\Out\\$" />
-  </parameter>
-</parameters>
