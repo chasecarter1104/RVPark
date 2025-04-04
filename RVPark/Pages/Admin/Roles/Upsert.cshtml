@@ -1,33 +1,53 @@
 ﻿@page
-@model FoodDelivery.Pages.Admin.Roles.UpsertModel
-@{
-}
-<div class="card" id="card">
-    <form class=form method="post">
-        <div class="card-header">
-            <h2>@(Model.IsUpdate ? "Update" : "Create") Role</h2>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-9">
-                    @if (Model.IsUpdate)
-                    {
-                        <input type="hidden" asp-for="@Model.CurrentRole.Id" />
-                        <input type="hidden" asp-for="@Model.CurrentRole.ConcurrencyStamp" />
-                        <input type="hidden" asp-for="@Model.IsUpdate" value="true" />
-                        <input class="form-control" asp-for="@Model.CurrentRole.Name" />
-                    }
-                    else
-                    {
-                        <label asp-for="@Model.CurrentRole.Name">Role</label>
-                        <input class="form-control" asp-for="@Model.CurrentRole.Name" value="@Model.CurrentRole.Name" />
-                        <input type="hidden" asp-for="@Model.IsUpdate" value="false" />
-                    }
-                </div>
-                <div class="col-md-3">
-                    <button type="submit" id="button" class="btn btn-primary form-control">@(Model.IsUpdate ? "Update" : "Create")</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+@model RVPark.Pages.Admin.Roles.UpsertModel
+
+<form method="post" asp-action="Upsert">
+	<div class="container">
+		<div class="row px-2 mx-2 backgroundWhite border">
+			<div asp-validation-summary="All" class="text-danger"></div>
+			<div class="col-12 px-3" style="border-bottom: 1px solid #325d88">
+				<h2 class="text-primary">@(Model.RoleObj != null && Model.RoleObj.Id != 0 ? "Update" : "Create") Role</h2>
+			</div>
+			<div class="col-8 pt-3 px-3">
+				<div class="form-group row py-3">
+					<div class="col-3">
+						<label asp-for="RoleObj.Name" class="control-label"></label>
+					</div>
+					<div class="col-9">
+						<input class="form-control" asp-for="RoleObj.Name" />
+						<span class="text-danger" asp-validation-for="RoleObj.Name"></span>
+					</div>
+
+					@if (Model.RoleObj != null && Model.RoleObj.Id != 0)
+					{
+						<input type="hidden" asp-for="RoleObj.Id" />
+					}
+				</div>
+				<div class="form-group row py-3">
+					<div class="col-3">
+						<label asp-for="RoleObj.Description" class="control-label">Description</label>
+					</div>
+					<div class="col-9">
+						<input class="form-control" asp-for="RoleObj.Description" />
+						<span class="text-danger" asp-validation-for="RoleObj.Description"></span>
+					</div>
+				</div>
+				
+				<div class="form-group row py-3">
+					<div class="row">
+						<div class="col-9 offset-3">
+							<div class="row">
+								<div class="col-6">
+									<button type="submit" class="btn btn-primary form-control">@(Model.RoleObj != null && Model.RoleObj.Id != 0 ? "Update" : "Create")</button>
+								</div>
+								<div class="col-6">
+									<a asp-page="./Index" class="btn btn-success form-control">Cancel</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

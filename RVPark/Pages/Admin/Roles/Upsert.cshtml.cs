@@ -1,55 +1,60 @@
-using Microsoft.AspNetCore.Identity;
+using ApplicationCore.Interfaces;
+using ApplicationCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
-namespace FoodDelivery.Pages.Admin.Roles
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Infrastructure.Data;
+namespace RVPark.Pages.Admin.Roles
 {
     public class UpsertModel : PageModel
     {
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _webhhostEnvironment;
 
-        public UpsertModel(RoleManager<IdentityRole> roleManager)
+        [BindProperty]
+        public Role RoleObj { get; set; }
+
+        public IEnumerable<SelectListItem> RoleObjList { get; set; }
+
+        public UpsertModel(UnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
         {
-            _roleManager = roleManager;
+            _unitOfWork = unitOfWork;
+            _webhhostEnvironment = hostEnvironment;
         }
 
-        [BindProperty]
-        public IdentityRole CurrentRole { get; set; }
-        [BindProperty]
-        public bool IsUpdate { get; set; }
-
-        public async Task OnGetAsync(string? id)
+        public void OnGet(int? id)
         {
-            if (id != null)
+
+            if (id != null) // edit version
             {
-                CurrentRole = await _roleManager.FindByIdAsync(id);
-                IsUpdate = true;
+                RoleObj = _unitOfWork.Role.Get(u=>u.Id == id) ?? new Role();
             }
             else
             {
-                CurrentRole = new IdentityRole();
-                IsUpdate = false;
+                RoleObj = new Role();
             }
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
 
-            if (!IsUpdate)
+            if (!ModelState.IsValid)
             {
-                CurrentRole.NormalizedName = CurrentRole.Name.ToUpper();
-
-                await _roleManager.CreateAsync(CurrentRole);
-                return RedirectToPage("./Index", new { success = true, message = "Successfully Added" });
-            }
-            else
-            {
-                CurrentRole.NormalizedName = CurrentRole.Name.ToUpper();
-
-                await _roleManager.UpdateAsync(CurrentRole);
-                return RedirectToPage("./Index", new { success = true, message = "Update Successful" });
+                return Page();
             }
 
+            if (RoleObj.Id == 0) // if new
+            {
+                _unitOfWork.Role.Add(RoleObj);
+            }
+            else // existing
+            {
+                _unitOfWork.Role.Update(RoleObj);
+            }
+
+            _unitOfWork.Commit();
+            return RedirectToPage("./Index");
         }
+
     }
 }

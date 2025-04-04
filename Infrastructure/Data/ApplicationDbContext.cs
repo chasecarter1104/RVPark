@@ -16,5 +16,7 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<SiteType> SiteType { get; set; }
     public DbSet<User> User { get; set; }
     public DbSet<Fee> Fee { get; set; }
+    public DbSet<Role> Role { get; set; }
+
 
 }
