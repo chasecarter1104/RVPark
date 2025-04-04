@@ -21,47 +21,37 @@ function loadList() {
             { data: "description" },
             {
                 data: "id", width: "30%",
-                "render": function (data) {
+                "render": function (data, type, row) {
+                    let lockBtnClass = row.isLocked ? "btn-secondary" : "btn-warning";
+                    let lockIcon = row.isLocked ? "fa-lock" : "fa-unlock";
+                    let lockText = row.isLocked ? "Unlock" : "Lock";
+
                     return `<div class="text-center">
-                            <a href="/Admin/Roles/Upsert?id=${data}"
-                            class ="btn btn-success text-white style="cursor:pointer; width=100px;"> <i class="far fa-edit"></i>Edit</a>
-                            <a onClick="Delete('/api/role/'+${data})"
-                            class="btn btn-danger text-white" style="cursor:pointer; width:100px;"> 
-                            <i class="far fa-trash-alt"></i> Delete</a>
-                    </div>`;
+                <a href="/Admin/Roles/Upsert?id=${data}"
+                    class ="btn btn-success text-white" style="cursor:pointer; width=100px;">
+                    <i class="far fa-edit"></i> Edit</a>
+               
+                <button onClick="LockRole(${data})"
+                    class="btn ${lockBtnClass} text-white" style="cursor:pointer; width:100px;">
+                    <i class="fas ${lockIcon}"></i> ${lockText}</button>
+            </div>`;
                 }
             }
         ],
+
         "language": {
             "emptyTable": "no data found."
         },
         "width": "100%"
     });
 }
-
-function Delete(url) {
-    swal(
-        {
-            title: "Are you sure you want to delete?",
-            text: "You will not be able to restore this data.",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true
-        }).then((willDelete) => {
-            if (willDelete) {
-                $.ajax({
-                    type: 'DELETE',
-                    url: url,
-                    success: function (data) {
-                        if (data.success) {
-                            toastr.success(data.message);
-                            dataTable.ajax.reload();
-                        }
-                        else
-                            toastr.error(data.message);
-
-                    }
-                })
-            }
-        })
+function LockRole(id) {
+    $.post("/Role/Lock", { id: id }, function (data) {
+        if (data.success) {
+            toastr.success(data.message);
+            dataTable.ajax.reload(); // Refresh the table
+        } else {
+            toastr.error(data.message);
+        }
+    });
 }

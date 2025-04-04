@@ -84,8 +84,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>cshush814k</Fingerprint>
-      <Integrity>dApN1Upvw0aMCTfq7l2lgjZgm3HYVawJGJEOtKR0olA=</Integrity>
+      <Fingerprint>633576b9wa</Fingerprint>
+      <Integrity>HjILDweCVRGF9empjQo+Dh5A6pZgv+Y/fPkgv09g7WM=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\role.js'))</OriginalItemSpec>
