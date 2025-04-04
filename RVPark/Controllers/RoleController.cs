@@ -31,21 +31,23 @@ namespace RVPark.Controllers
                 return Json(new { success = true, message = "Delete successful." });
             }
 
-            [HttpPost]
-            public IActionResult Lock(int id)
+            
+        [HttpPost("lock/{id}")]  // This makes the endpoint /api/role/lock/{id}
+        public IActionResult Lock(int id)
+        {
+            var objFromDb = _unitOfWork.Role.GetByID(id);
+            if (objFromDb == null)
             {
-                var objFromDb = _unitOfWork.Role.GetByID(id);
-                if (objFromDb == null)
-                {
-                    return Json(new { success = false, message = "Role not found." });
-                }
-            
-                objFromDb.IsLocked = true; // Assuming you have this property
-                _unitOfWork.Role.Update(objFromDb);
-                _unitOfWork.Commit();
-            
-                return Json(new { success = true, message = "Role locked successfully." });
+                return Json(new { success = false, message = "Role not found." });
             }
+
+            objFromDb.IsLocked = !objFromDb.IsLocked; // Toggle lock state
+            _unitOfWork.Role.Update(objFromDb);
+            _unitOfWork.Commit();
+
+            return Json(new { success = true, message = objFromDb.IsLocked ? "Role locked successfully." : "Role unlocked successfully." });
+        }
+
 
     }
 }
