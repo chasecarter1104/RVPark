@@ -20,6 +20,11 @@ namespace ApplicationCore.Models
         public string Name { get; set; } = "";
 
         [Required]
+        [Display(Name = "Site Description")]
+        public string Description { get; set; } = "";
+        public string ImageUrl { get; set; } = "";
+
+        [Required]
         [Range(1, float.MaxValue, ErrorMessage = "length must be greater than 1.")]
         public float MaxLength { get; set; }
         public int SiteTypeId { get; set; }
