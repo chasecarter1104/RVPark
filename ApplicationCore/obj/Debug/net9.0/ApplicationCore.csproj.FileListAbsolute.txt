@@ -24,3 +24,16 @@ C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\obj\Debug\net9.0\Appli
 C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\obj\Debug\net9.0\refint\ApplicationCore.dll
 C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\obj\Debug\net9.0\ApplicationCore.pdb
 C:\Users\chase\Source\Repos\RVPark_backup\ApplicationCore\obj\Debug\net9.0\ref\ApplicationCore.dll
+D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\bin\Debug\net9.0\ApplicationCore.deps.json
+D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\bin\Debug\net9.0\ApplicationCore.dll
+D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\bin\Debug\net9.0\ApplicationCore.pdb
+D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\obj\Debug\net9.0\ApplicationCore.csproj.AssemblyReference.cache
+D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\obj\Debug\net9.0\ApplicationCore.GeneratedMSBuildEditorConfig.editorconfig
+D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\obj\Debug\net9.0\ApplicationCore.AssemblyInfoInputs.cache
+D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\obj\Debug\net9.0\ApplicationCore.AssemblyInfo.cs
+D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\obj\Debug\net9.0\ApplicationCore.csproj.CoreCompileInputs.cache
+D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\obj\Debug\net9.0\ApplicationCore.sourcelink.json
+D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\obj\Debug\net9.0\ApplicationCore.dll
+D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\obj\Debug\net9.0\refint\ApplicationCore.dll
+D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\obj\Debug\net9.0\ApplicationCore.pdb
+D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\obj\Debug\net9.0\ref\ApplicationCore.dll
