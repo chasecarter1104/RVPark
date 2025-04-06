@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\js\\reservation.js"
     },
     {
+      "Id": "D:\\VS Studio 2022\\source\\repos\\RVPark\\RVPark\\wwwroot\\js\\role.js",
+      "PackagePath": "staticwebassets\\js\\role.js"
+    },
+    {
       "Id": "D:\\VS Studio 2022\\source\\repos\\RVPark\\RVPark\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
