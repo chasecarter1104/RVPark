@@ -5,15 +5,15 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace FoodDelivery.Pages.Admin.Users
+namespace RVPark.Pages.Admin.Users
 {
-    public class UpdateModel : PageModel
+    public class UpsertModel : PageModel
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UpdateModel(UnitOfWork unitOfWork, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public UpsertModel(UnitOfWork unitOfWork, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;

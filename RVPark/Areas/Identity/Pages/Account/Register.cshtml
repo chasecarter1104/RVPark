@@ -54,14 +54,14 @@
                             <input type="password" asp-for="Input.ConfirmPassword" autocomplete="off" placeholder="ConfirmPassword" class="form-control" />
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
-                        @if (User.IsInRole(SD.AdminRole))
-                        {
+                        @*@if (User.IsInRole(SD.AdminRole))
+                        {*@
                             <div class="py-2">
                                 <input type="radio" name="rdUserRole" value="@SD.CustomerRole" /> @SD.CustomerRole
                                 <input type="radio" name="rdUserRole" value="@SD.EmployeeRole" /> @SD.EmployeeRole
                                 <input type="radio" name="rdUserRole" value="@SD.AdminRole" /> @SD.AdminRole
                             </div>
-                        }
+                        @*}*@
                         <div class="py-2">
                             <button type="submit" class="btn btn-success form-control">Register</button>
                         </div>

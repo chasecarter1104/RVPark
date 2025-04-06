@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Interfaces;
 using ApplicationCore.Models;
+using Microsoft.AspNetCore.Rewrite;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,8 +23,19 @@ namespace Infrastructure.Data
         private IGenericRepository<SiteType> _SiteType;
         private IGenericRepository<User> _User;
         private IGenericRepository<Fee> _Fee;
+        private IGenericRepository<Role> _Role;
 
-
+        public IGenericRepository<Role> Role
+        {
+            get
+            {
+                if (_Role == null)
+                {
+                    _Role = new GenericRepository<Role>(_dbContext);
+                }
+                return _Role;
+            }
+        }
         public IGenericRepository<Fee> Fee
         {
             get
