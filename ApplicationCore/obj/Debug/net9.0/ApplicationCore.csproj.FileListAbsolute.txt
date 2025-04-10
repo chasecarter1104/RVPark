@@ -37,3 +37,16 @@ D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\obj\Debug\net9.0\Applicati
 D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\obj\Debug\net9.0\refint\ApplicationCore.dll
 D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\obj\Debug\net9.0\ApplicationCore.pdb
 D:\VS Studio 2022\source\repos\RVPark\ApplicationCore\obj\Debug\net9.0\ref\ApplicationCore.dll
+C:\Users\Calvin Oats\source\repos\RV_Park\ApplicationCore\bin\Debug\net9.0\ApplicationCore.deps.json
+C:\Users\Calvin Oats\source\repos\RV_Park\ApplicationCore\bin\Debug\net9.0\ApplicationCore.dll
+C:\Users\Calvin Oats\source\repos\RV_Park\ApplicationCore\bin\Debug\net9.0\ApplicationCore.pdb
+C:\Users\Calvin Oats\source\repos\RV_Park\ApplicationCore\obj\Debug\net9.0\ApplicationCore.csproj.AssemblyReference.cache
+C:\Users\Calvin Oats\source\repos\RV_Park\ApplicationCore\obj\Debug\net9.0\ApplicationCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Calvin Oats\source\repos\RV_Park\ApplicationCore\obj\Debug\net9.0\ApplicationCore.AssemblyInfoInputs.cache
+C:\Users\Calvin Oats\source\repos\RV_Park\ApplicationCore\obj\Debug\net9.0\ApplicationCore.AssemblyInfo.cs
+C:\Users\Calvin Oats\source\repos\RV_Park\ApplicationCore\obj\Debug\net9.0\ApplicationCore.csproj.CoreCompileInputs.cache
+C:\Users\Calvin Oats\source\repos\RV_Park\ApplicationCore\obj\Debug\net9.0\ApplicationCore.sourcelink.json
+C:\Users\Calvin Oats\source\repos\RV_Park\ApplicationCore\obj\Debug\net9.0\ApplicationCore.dll
+C:\Users\Calvin Oats\source\repos\RV_Park\ApplicationCore\obj\Debug\net9.0\refint\ApplicationCore.dll
+C:\Users\Calvin Oats\source\repos\RV_Park\ApplicationCore\obj\Debug\net9.0\ApplicationCore.pdb
+C:\Users\Calvin Oats\source\repos\RV_Park\ApplicationCore\obj\Debug\net9.0\ref\ApplicationCore.dll
