@@ -36,7 +36,7 @@ function loadList() {
             </div>`;
                 }
             }
-        ] i,
+        ] ,
 
         "language": {
             "emptyTable": "no data found."
