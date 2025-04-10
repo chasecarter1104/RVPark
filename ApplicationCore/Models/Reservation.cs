@@ -21,6 +21,8 @@ namespace ApplicationCore.Models
         public int SiteId { get; set; }
         public string UserId { get; set; }
 
+
+
         // Connect Objects or Tables
         [ForeignKey("SiteId")]
         public virtual Site Site { get; set; }
