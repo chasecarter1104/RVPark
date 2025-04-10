@@ -42,6 +42,8 @@ namespace RVPark.Pages.Admin.Sites
         public IActionResult OnPost()
         {
             LoadSiteTypes();
+            string webRootPath = _webhhostEnvironment.WebRootPath;
+            var files = HttpContext.Request.Form.Files;
 
             if (!ModelState.IsValid)
             {
@@ -50,10 +52,25 @@ namespace RVPark.Pages.Admin.Sites
 
             if (SiteObj.Id == 0) // if new
             {
+                if (files.Count > 0) 
+                {
+                    //uploaded a file
+                    string fileName = Guid.NewGuid().ToString();
+                    var uploads = Path.Combine(webRootPath, @"images\sites");
+                    var extension = Path.GetExtension(files[0].FileName);
+                    var fullPath = Path.Combine(uploads, fileName + extension);
+
+                    using var fileStream = System.IO.File.Create(fullPath);
+                    files[0].CopyTo(fileStream);
+                    SiteObj.ImageUrl = @"\images\menuItems\" + fileName + extension;
+                }
+
                 _unitOfWork.Site.Add(SiteObj);
             }
             else // existing
             {
+
+
                 _unitOfWork.Site.Update(SiteObj);
             }
 

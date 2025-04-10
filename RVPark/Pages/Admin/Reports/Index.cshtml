@@ -1,0 +1,41 @@
+﻿@page
+
+@{
+    ViewData["Title"] = "Reports";
+}
+
+<div class="border backgroundWhite container">
+    <div class="row pt-4">
+        <div class="col-6">
+			<h2 class="text-primary">Reports</h2>
+        </div>
+    </div>
+	<br /><br />
+
+    <form method="post" asp-action="GenerateReport" class="p-3">
+        <h3>Reservations</h3>
+        <br />
+
+        <div class="mb-3 row">
+            <label for="startDate" class="col-sm-2 col-form-label">Start Date:</label>
+            <div class="col-sm-4">
+                <input type="date" name="startDate" id="startDate" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="endDate" class="col-sm-2 col-form-label">End Date:</label>
+            <div class="col-sm-4">
+                <input type="date" name="endDate" id="endDate" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-primary">Generate Report</button>
+            </div>
+        </div>
+    </form>
+	
+</div>
+
