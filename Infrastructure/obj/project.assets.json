@@ -3176,23 +3176,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Peter Rosqvist\\.nuget\\packages\\": {},
+    "C:\\Users\\chase\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VS Studio 2022\\source\\repos\\RVPark\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\chase\\source\\repos\\RVPark_backup\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "D:\\VS Studio 2022\\source\\repos\\RVPark\\Infrastructure\\Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\Peter Rosqvist\\.nuget\\packages\\",
-      "outputPath": "D:\\VS Studio 2022\\source\\repos\\RVPark\\Infrastructure\\obj\\",
+      "projectPath": "C:\\Users\\chase\\source\\repos\\RVPark_backup\\Infrastructure\\Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\chase\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\chase\\source\\repos\\RVPark_backup\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Peter Rosqvist\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\chase\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3201,14 +3201,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "D:\\VS Studio 2022\\source\\repos\\RVPark\\ApplicationCore\\ApplicationCore.csproj": {
-              "projectPath": "D:\\VS Studio 2022\\source\\repos\\RVPark\\ApplicationCore\\ApplicationCore.csproj"
+            "C:\\Users\\chase\\source\\repos\\RVPark_backup\\ApplicationCore\\ApplicationCore.csproj": {
+              "projectPath": "C:\\Users\\chase\\source\\repos\\RVPark_backup\\ApplicationCore\\ApplicationCore.csproj"
             }
           }
         }
