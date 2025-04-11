@@ -23,27 +23,20 @@ function loadList() {
         "columns": [
             { data: "name" },
             { data: "maxLength", "render": $.fn.dataTable.render.number(',', '.', 2, '', ' ft'), width: "15%" },
-            { data: "siteType.name", className: "text-end" },
-            {
-                data: "imageUrl",
-                render: function (data) {
-                    if (data && data.trim() !== "") {
-                        return `<img src="${data}" width="100" class="img-thumbnail" />`;
-                    }
-                    return "no image"; // Don't show anything if no image
-                },
-                width: "20%"
-            },
-
+            { data: "siteType.name" },
+            { data: "description" },
+          
             {
                 data: "id", width: "30%",
                 "render": function (data) {
                     return `<div class="text-center">
+                            <a href="/Admin/Sites/Details?id=${data}"
+                            class ="btn btn-warning text-white style="cursor:pointer; width=100px;"> <i class="far fa-edit"></i>Details</a>
                             <a href="/Admin/Sites/Upsert?id=${data}"
                             class ="btn btn-success text-white style="cursor:pointer; width=100px;"> <i class="far fa-edit"></i>Edit</a>
                             <a onClick="Delete('/api/site/'+${data})"
                             class="btn btn-danger text-white" style="cursor:pointer; width:100px;"> 
-                            <i class="far fa-trash-alt"></i> Delete</a>
+                            <i class="far fa-trash-alt"></i> Lock</a>
                     </div>`;
                 }
             }

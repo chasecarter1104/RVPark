@@ -7,7 +7,7 @@ $(document).ready(function () {
 function loadList() {
     if ($.fn.DataTable.isDataTable('#DT_load')) {
         dataTable.destroy();
-        $('#DT_load').empty(); // empty in case the columns change
+        $('#DT_load').empty();
     }
 
     dataTable = $('#DT_load').DataTable({
@@ -18,10 +18,10 @@ function loadList() {
 
         },
         "columns": [
-            {data: "startDate"},
-            {data: "endDate"},
-            {data: "site.name"},
-            {data: "user.fullName"},
+            { data: "startDate" },
+            { data: "endDate" },
+            { data: "site.name" },
+            { data: "user.fullName" },
             {
                 data: "id", width: "30%",
                 "render": function (data) {
