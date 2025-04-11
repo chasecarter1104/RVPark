@@ -30,5 +30,21 @@ namespace RVPark.Controllers
             _unitOfWork.Commit();
             return Json(new { success = true, message = "Delete successful" });
         }
+
+        [HttpPost("lock/{id}")]  // This makes the endpoint /api/siteType/lock/{id}
+        public IActionResult Lock(int id)
+        {
+            var objFromDb = _unitOfWork.SiteType.GetByID(id);
+            if (objFromDb == null)
+            {
+                return Json(new { success = false, message = "Site Type not found." });
+            }
+
+            objFromDb.IsLocked = !objFromDb.IsLocked; // Toggle lock state
+            _unitOfWork.SiteType.Update(objFromDb);
+            _unitOfWork.Commit();
+
+            return Json(new { success = true, message = objFromDb.IsLocked ? "Site Type locked successfully." : "Site Type unlocked successfully." });
+        }
     }
 }
