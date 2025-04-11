@@ -62,3 +62,19 @@ C:\Users\Calvin Oats\source\repos\RV_Park\Infrastructure\obj\Debug\net9.0\Infras
 C:\Users\Calvin Oats\source\repos\RV_Park\Infrastructure\obj\Debug\net9.0\refint\Infrastructure.dll
 C:\Users\Calvin Oats\source\repos\RV_Park\Infrastructure\obj\Debug\net9.0\Infrastructure.pdb
 C:\Users\Calvin Oats\source\repos\RV_Park\Infrastructure\obj\Debug\net9.0\ref\Infrastructure.dll
+C:\Users\longj\OneDrive\Documents\GitHub\RVPark3\Infrastructure\bin\Debug\net9.0\Infrastructure.deps.json
+C:\Users\longj\OneDrive\Documents\GitHub\RVPark3\Infrastructure\bin\Debug\net9.0\Infrastructure.dll
+C:\Users\longj\OneDrive\Documents\GitHub\RVPark3\Infrastructure\bin\Debug\net9.0\Infrastructure.pdb
+C:\Users\longj\OneDrive\Documents\GitHub\RVPark3\Infrastructure\bin\Debug\net9.0\ApplicationCore.dll
+C:\Users\longj\OneDrive\Documents\GitHub\RVPark3\Infrastructure\bin\Debug\net9.0\ApplicationCore.pdb
+C:\Users\longj\OneDrive\Documents\GitHub\RVPark3\Infrastructure\obj\Debug\net9.0\Infrastructure.csproj.AssemblyReference.cache
+C:\Users\longj\OneDrive\Documents\GitHub\RVPark3\Infrastructure\obj\Debug\net9.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\longj\OneDrive\Documents\GitHub\RVPark3\Infrastructure\obj\Debug\net9.0\Infrastructure.AssemblyInfoInputs.cache
+C:\Users\longj\OneDrive\Documents\GitHub\RVPark3\Infrastructure\obj\Debug\net9.0\Infrastructure.AssemblyInfo.cs
+C:\Users\longj\OneDrive\Documents\GitHub\RVPark3\Infrastructure\obj\Debug\net9.0\Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\longj\OneDrive\Documents\GitHub\RVPark3\Infrastructure\obj\Debug\net9.0\Infrastructure.sourcelink.json
+C:\Users\longj\OneDrive\Documents\GitHub\RVPark3\Infrastructure\obj\Debug\net9.0\Infrastr.15EFFBFE.Up2Date
+C:\Users\longj\OneDrive\Documents\GitHub\RVPark3\Infrastructure\obj\Debug\net9.0\Infrastructure.dll
+C:\Users\longj\OneDrive\Documents\GitHub\RVPark3\Infrastructure\obj\Debug\net9.0\refint\Infrastructure.dll
+C:\Users\longj\OneDrive\Documents\GitHub\RVPark3\Infrastructure\obj\Debug\net9.0\Infrastructure.pdb
+C:\Users\longj\OneDrive\Documents\GitHub\RVPark3\Infrastructure\obj\Debug\net9.0\ref\Infrastructure.dll
