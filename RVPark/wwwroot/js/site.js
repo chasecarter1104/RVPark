@@ -25,7 +25,7 @@ function loadList() {
             { data: "maxLength", "render": $.fn.dataTable.render.number(',', '.', 2, '', ' ft'), width: "15%" },
             { data: "siteType.name" },
             { data: "description" },
-
+          
             {
                 data: "id", width: "30%",
                 "render": function (data) {
