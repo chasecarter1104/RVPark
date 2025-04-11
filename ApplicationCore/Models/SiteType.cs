@@ -20,5 +20,7 @@ namespace ApplicationCore.Models
 
         [Display(Name = "End Date")]
         public DateTime? EndDate { get; set; }
+
+        public bool IsLocked { get; set; }
     }
 }
