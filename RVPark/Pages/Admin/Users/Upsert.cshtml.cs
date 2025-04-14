@@ -26,12 +26,23 @@ namespace RVPark.Pages.Admin.Users
         public List<string> AllRoles { get; set; }
         public List<string> OldRoles { get; set; }
 
+
+
+
+
         public async Task OnGet(string id)
         {
             AppUser = _unitOfWork.User.Get(u => u.Id == id);
             var roles = await _userManager.GetRolesAsync(AppUser);
             UsersRoles = roles.ToList();
-            AllRoles = _roleManager.Roles.Select(r => r.Name).ToList();
+
+            AllRoles = _unitOfWork.Role.List()
+     .Where(r => !r.IsLocked || UsersRoles.Contains(r.Name))
+     .Select(r => r.Name)
+     .ToList();
+
+
+
             OldRoles = roles.ToList();
 
         }
