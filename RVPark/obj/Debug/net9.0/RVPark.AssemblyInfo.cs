@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RVPark")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+687825a3e389185bce6e85c268473d28e9ab42b3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+31207a84883c71095d949c88e916e36b4b9e4d69")]
 [assembly: System.Reflection.AssemblyProductAttribute("RVPark")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RVPark")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
