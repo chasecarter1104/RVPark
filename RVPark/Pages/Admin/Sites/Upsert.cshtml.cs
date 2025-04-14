@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Infrastructure.Data;
+using Org.BouncyCastle.Asn1.X509;
 namespace RVPark.Pages.Admin.Sites
 {
     public class UpsertModel : PageModel
@@ -54,15 +55,17 @@ namespace RVPark.Pages.Admin.Sites
             {
                 if (files.Count > 0) 
                 {
-                    //uploaded a file
-                    string fileName = Guid.NewGuid().ToString();
-                    var uploads = Path.Combine(webRootPath, @"images\sites");
-                    var extension = Path.GetExtension(files[0].FileName);
-                    var fullPath = Path.Combine(uploads, fileName + extension);
+                    for(int i = 0; i < SiteObj.ImageUrls.Count; i++)
+                    {
+                        string fileName = Guid.NewGuid().ToString();
+                        var uploads = Path.Combine(webRootPath, @"images\sites");
+                        var extension = Path.GetExtension(files[0].FileName);
+                        var fullPath = Path.Combine(uploads, fileName + extension);
 
-                    using var fileStream = System.IO.File.Create(fullPath);
-                    files[0].CopyTo(fileStream);
-                    SiteObj.ImageUrl = @"\images\menuItems\" + fileName + extension;
+                        using var fileStream = System.IO.File.Create(fullPath);
+                        files[0].CopyTo(fileStream);
+                        SiteObj.ImageUrls[i] = @"\images\SitePictures\" + fileName + extension;
+                    }
                 }
 
                 _unitOfWork.Site.Add(SiteObj);
