@@ -1,4 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ApplicationCore.Models
 {
@@ -6,12 +11,12 @@ namespace ApplicationCore.Models
     {
         [Key]
         public int Id { get; set; }
-
         [Required]
         [Display(Name = "Site Type Name")]
         public string Name { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Price should be at least $1")]
         public int Price { get; set; }
 
         [Required]
@@ -20,5 +25,7 @@ namespace ApplicationCore.Models
 
         [Display(Name = "End Date")]
         public DateTime? EndDate { get; set; }
+
+        public bool IsLocked { get; set; }
     }
 }
