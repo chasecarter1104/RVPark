@@ -16,6 +16,7 @@ namespace ApplicationCore.Models
         public string Name { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Price should be at least $1")]
         public int Price { get; set; }
 
         [Required]
