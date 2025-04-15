@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ApplicationCore.Models
 {
-    public class Role : IdentityUser
+    public class Role : IdentityRole
     {
 
         public string Description { get; set; }
