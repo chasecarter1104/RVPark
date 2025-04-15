@@ -66,18 +66,5 @@ namespace RVPark.Controllers
 
             return Json(availableSites);
         }
-
-
-        [HttpGet("SitePrice")]
-        public IActionResult GetSitePrice(int siteId)
-        {
-            var site = _unitOfWork.Site.Get(s => s.Id == siteId, includes: "SiteType");
-            if (site == null || site.SiteType == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(new { price = site.SiteType.Price });
-        }
     }
 }
