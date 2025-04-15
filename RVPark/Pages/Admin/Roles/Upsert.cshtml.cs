@@ -17,7 +17,7 @@ namespace RVPark.Pages.Admin.Roles
 
         public IEnumerable<SelectListItem> RoleObjList { get; set; }
 
-        public UpsertModel(UnitOfWork unitOfWork, RoleManager<Identity> roleManager)
+        public UpsertModel(UnitOfWork unitOfWork, RoleManager<IdentityRole> roleManager)
         {
             _unitOfWork = unitOfWork;
             _roleManager = roleManager;
