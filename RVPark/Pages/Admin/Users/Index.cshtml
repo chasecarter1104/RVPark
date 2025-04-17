@@ -15,7 +15,7 @@
     <br /><br />
     <p class="hidden" id="success">@Model.Success.ToString()</p>
     <p class="hidden" id="message">@Model.Message</p>
-    <table class="table table-striped table-bordered" style="width:100%">
+    <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th scope="col">Full Name</th>
@@ -73,7 +73,7 @@
                         </td>
                         <td>
                             <a class="btn btn-outline-success" asp-page="/Admin/Users/Upsert" asp-route-id="@user.Id">Update</a>
-                       
+
                         </td>
                     </tr>
                 }
@@ -82,7 +82,7 @@
         </tbody>
     </table>
 </div>
-@section Scripts{
+@section Scripts {
     <script>
         function alertFunc() {
             var success = $("#success").html()
@@ -95,6 +95,9 @@
 
         }
         window.onload = alertFunc();
+
+        dataTable = $('#DT_load').DataTable({});
+
     </script>
 }
 
