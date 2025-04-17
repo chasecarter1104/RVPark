@@ -1,7 +1,6 @@
 using ApplicationCore.Models;
 using ApplicationCore.Interfaces;
 using Infrastructure.Data;
-using ApplicationCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
