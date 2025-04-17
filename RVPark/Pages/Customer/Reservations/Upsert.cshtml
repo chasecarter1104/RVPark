@@ -1,5 +1,5 @@
 ﻿@page
-@model RVPark.Pages.Admin.Reservations.UpsertModel
+@model RVPark.Pages.Customer.Reservations.UpsertModel
 
 <form method="post" asp-action="Upsert">
     <div class="container">
@@ -44,10 +44,8 @@
                         <label asp-for="Reservation.UserId">User</label>
                     </div>
                     <div class="col-9">
-                        @Html.DropDownListFor(m => m.Reservation.UserId,
-                                 Model.UserList,
-                                 " - Please select a user - ",
-                                 new { @class = "form-control", id = "Reservation_UserId" })
+	                    <input value="@Model.User.FullName" disabled />
+                        <input type="hidden" class="form-control" asp-for="Reservation.UserId" id="Reservation_UserId" value="@Model.User.Id" />
                         <span class="text-danger" asp-validation-for="Reservation.UserId"></span>
                     </div>
                 </div>
@@ -111,22 +109,22 @@
     }
 
 
-        tinymce.init({
-            selector: 'textarea',
-            plugins: "lists",
-            menubar: "file edit format"
-        });
+    tinymce.init({
+        selector: 'textarea',
+        plugins: "lists",
+        menubar: "file edit format"
+    });
 
-        function ValidateInput() {
+    function ValidateInput() {
 
-            if ($('#Reservation_SiteId option:selected').val() == ""){
-                swal('Error', 'Please Select a Site', 'error')
-                return false;
-            }
-            if ($('#Reservation_UserId option:selected').val() == ""){
-                swal('Error', 'Please Select a User', 'error')
-                return false;
-            }
+        if ($('#Reservation_SiteId option:selected').val() == ""){
+            swal('Error', 'Please Select a Site', 'error')
+            return false;
         }
+        if ($('#Reservation_UserId option:selected').val() == ""){
+            swal('Error', 'Please Select a User', 'error')
+            return false;
+        }
+    }
 
 </script>

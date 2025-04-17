@@ -20,9 +20,7 @@ namespace ApplicationCore.Models
 
         public int SiteId { get; set; }
         public string UserId { get; set; }
-        public int FeeId { get; set; }
-
-
+        public int? FeeId { get; set; }
 
         // Connect Objects or Tables
         [ForeignKey("SiteId")]

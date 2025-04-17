@@ -22,7 +22,9 @@ namespace ApplicationCore.Models
         [Required]
         [Display(Name = "Site Description")]
         public string Description { get; set; } = "";
-        public string ImageUrl { get; set; } = "";
+        public List<string> ImageUrls { get; set; } = new List<string>();//-------------------------------------------an array of images
+
+        public bool IsLocked { get; set; }
 
         [Required]
         [Range(1, float.MaxValue, ErrorMessage = "length must be greater than 1.")]
@@ -31,6 +33,6 @@ namespace ApplicationCore.Models
 
         //Connect Objects or Tables
         [ForeignKey("SiteTypeId")]
-        public virtual SiteType? SiteType { get; set; }
+        public virtual SiteType SiteType { get; set; }
     }
 }
