@@ -18,5 +18,14 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Fee> Fee { get; set; }
     public DbSet<Role> Role { get; set; }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Reservation>()
+            .HasMany(r => r.Fees)
+            .WithOne()
+            .HasForeignKey(f => f.Id);
+    }
 
 }
