@@ -77,13 +77,14 @@
 					<div class="col-9">
 						<!--<select asp-for="SiteObj.SiteTypeId" asp-items="Model.SiteTypeList" class="form-control"></select>-->
 						@Html.DropDownListFor(m => m.SiteObj.SiteTypeId,
-                                 Model.SiteTypeList,
-                                 " - Please select a type - ",
-                                 new { @class = "form-control", @id = "SiteId" })
+							Model.SiteTypeList,
+							" - Please select a type - ",
+							new { @class = "form-control", @id = "SiteId" })
 						<span class="text-danger" asp-validation-for="SiteObj.SiteTypeId"></span>
 					</div>
-				</div>SiteObj != null)
-				<!--{
+				</div>
+				<!--SiteObj != null)
+				
 					<div class="col-4 p-4">
 						<img id="existingImg" src="SiteObj.ImageUrl" style="border-radius:5px; border: 1px solid #bbb9b9; width:100%" />
 					</div>

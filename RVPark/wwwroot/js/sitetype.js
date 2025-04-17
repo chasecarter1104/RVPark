@@ -19,7 +19,15 @@ function loadList() {
         "columns": [
             { data: "name" },
             { data: "price", "render": $.fn.dataTable.render.number(',', '.', 2, "$"), width: "15%" },
-
+            { data: "startDate", render: $.fn.dataTable.render.date(), width: "15%" },
+            {
+                data: "endDate", render: function (data) {
+                    if (data) {
+                        return new Date(data).toLocaleDateString();
+                    }
+                    return null;
+                }, defaultContent: "Present", className: 'text-end', width: "15%"
+            },
             {
                 data: "id", width: "25%",
                 "render": function (data, type, row) {

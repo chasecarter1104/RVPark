@@ -14,8 +14,7 @@ namespace Infrastructure.Migrations
                 name: "FeeId",
                 table: "Reservation",
                 type: "int",
-                nullable: false,
-                defaultValue: 0);
+                nullable: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservation_FeeId",
@@ -27,8 +26,7 @@ namespace Infrastructure.Migrations
                 table: "Reservation",
                 column: "FeeId",
                 principalTable: "Fee",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
         }
 
         /// <inheritdoc />

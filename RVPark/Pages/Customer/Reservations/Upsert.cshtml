@@ -1,0 +1,130 @@
+﻿@page
+@model RVPark.Pages.Customer.Reservations.UpsertModel
+
+<form method="post" asp-action="Upsert">
+    <div class="container">
+        <div class="row px-2 mx-2 backgroundWhite border">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
+                <h2 class="text-primary">@(Model.Reservation.Id != 0 ? "Update" : "Create") Reservation</h2>
+            </div>
+            <div class="col-8 pt-3">
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Reservation.StartDate"></label>
+                    </div>
+                    <div class="col-9">
+                        <input type="date" class="form-control" asp-for="Reservation.StartDate" id="Reservation_StartDate" />
+                        <span class="text-danger" asp-validation-for="Reservation.StartDate"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Reservation.EndDate"></label>
+                    </div>
+                    <div class="col-9">
+                        <input type="date" class="form-control" asp-for="Reservation.EndDate" id="Reservation_EndDate" />
+                        <span class="text-danger" asp-validation-for="Reservation.EndDate"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Reservation.SiteId">Site</label>
+                    </div>
+                    <div class="col-9">
+                        @Html.DropDownListFor(m => m.Reservation.SiteId,
+                                 Model.SiteList,
+                                 " - Please select a site - ",
+                                 new { @class = "form-control", id = "Reservation_SiteId" })
+                        <span class="text-danger" asp-validation-for="Reservation.SiteId"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Reservation.UserId">User</label>
+                    </div>
+                    <div class="col-9">
+	                    <input value="@Model.User.FullName" disabled />
+                        <input type="hidden" class="form-control" asp-for="Reservation.UserId" id="Reservation_UserId" value="@Model.User.Id" />
+                        <span class="text-danger" asp-validation-for="Reservation.UserId"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-9 offset-3">
+                        <div class="row">
+                            <div class="col-6">
+                                @if (Model.Reservation.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
+                                }
+                            </div>
+                            <div class="col-6">
+                                <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementById("Reservation_StartDate").setAttribute("min", today);
+
+        document.getElementById("Reservation_StartDate").addEventListener("change", function () {
+            var startDate = this.value;
+            document.getElementById("Reservation_EndDate").setAttribute("min", startDate);
+            fetchAvailableSites();
+        });
+
+        document.getElementById("Reservation_EndDate").addEventListener("change", fetchAvailableSites);
+    });
+
+    function fetchAvailableSites() {
+        var startDate = document.getElementById("Reservation_StartDate").value;
+        var endDate = document.getElementById("Reservation_EndDate").value;
+
+        if (startDate && endDate) {
+            fetch(`/api/Reservation/AvailableSites?startDate=${startDate}&endDate=${endDate}`)
+                .then(response => response.json())
+                .then(data => {
+                    var siteDropdown = document.getElementById("Reservation_SiteId");
+                    siteDropdown.innerHTML = '<option value=""> - Please select a site - </option>';
+                    data.forEach(site => {
+                        var option = document.createElement("option");
+                        option.value = site.id;
+                        option.textContent = site.name;
+                        siteDropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching sites:', error));
+        }
+    }
+
+
+    tinymce.init({
+        selector: 'textarea',
+        plugins: "lists",
+        menubar: "file edit format"
+    });
+
+    function ValidateInput() {
+
+        if ($('#Reservation_SiteId option:selected').val() == ""){
+            swal('Error', 'Please Select a Site', 'error')
+            return false;
+        }
+        if ($('#Reservation_UserId option:selected').val() == ""){
+            swal('Error', 'Please Select a User', 'error')
+            return false;
+        }
+    }
+
+</script>

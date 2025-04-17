@@ -33,6 +33,6 @@ namespace ApplicationCore.Models
 
         //Connect Objects or Tables
         [ForeignKey("SiteTypeId")]
-        public virtual SiteType? SiteType { get; set; }
+        public virtual SiteType SiteType { get; set; }
     }
 }

@@ -53,6 +53,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("FeeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("SiteId")
                         .HasColumnType("int");
 
@@ -65,35 +68,13 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FeeId");
+
                     b.HasIndex("SiteId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Reservation");
-                });
-
-            modelBuilder.Entity("ApplicationCore.Models.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsLocked")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("ApplicationCore.Models.Site", b =>
@@ -108,9 +89,12 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
+                    b.PrimitiveCollection<string>("ImageUrls")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsLocked")
+                        .HasColumnType("bit");
 
                     b.Property<float>("MaxLength")
                         .HasColumnType("real");
@@ -167,6 +151,11 @@ namespace Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -183,6 +172,10 @@ namespace Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasDiscriminator().HasValue("IdentityRole");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -365,6 +358,17 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ApplicationCore.Models.Role", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("Role");
+                });
+
             modelBuilder.Entity("ApplicationCore.Models.User", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -382,6 +386,10 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("ApplicationCore.Models.Reservation", b =>
                 {
+                    b.HasOne("ApplicationCore.Models.Fee", "Fee")
+                        .WithMany()
+                        .HasForeignKey("FeeId");
+
                     b.HasOne("ApplicationCore.Models.Site", "Site")
                         .WithMany()
                         .HasForeignKey("SiteId")
@@ -393,6 +401,8 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Fee");
 
                     b.Navigation("Site");
 
