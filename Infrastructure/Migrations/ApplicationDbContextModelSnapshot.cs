@@ -17,7 +17,7 @@ namespace Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.3")
+                .HasAnnotation("ProductVersion", "9.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -25,10 +25,7 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("ApplicationCore.Models.Fee", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<float>("FeeAmount")
                         .HasColumnType("real");
@@ -53,9 +50,6 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("FeeId")
-                        .HasColumnType("int");
-
                     b.Property<int>("SiteId")
                         .HasColumnType("int");
 
@@ -67,8 +61,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FeeId");
 
                     b.HasIndex("SiteId");
 
@@ -384,12 +376,17 @@ namespace Infrastructure.Migrations
                     b.HasDiscriminator().HasValue("User");
                 });
 
+            modelBuilder.Entity("ApplicationCore.Models.Fee", b =>
+                {
+                    b.HasOne("ApplicationCore.Models.Reservation", null)
+                        .WithMany("Fees")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ApplicationCore.Models.Reservation", b =>
                 {
-                    b.HasOne("ApplicationCore.Models.Fee", "Fee")
-                        .WithMany()
-                        .HasForeignKey("FeeId");
-
                     b.HasOne("ApplicationCore.Models.Site", "Site")
                         .WithMany()
                         .HasForeignKey("SiteId")
@@ -401,8 +398,6 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Fee");
 
                     b.Navigation("Site");
 
@@ -469,6 +464,11 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ApplicationCore.Models.Reservation", b =>
+                {
+                    b.Navigation("Fees");
                 });
 #pragma warning restore 612, 618
         }

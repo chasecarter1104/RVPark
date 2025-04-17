@@ -17,7 +17,7 @@ namespace RVPark.Controllers
         {
             try
             {
-                var data = _unitOfWork.Reservation.List(null, null, "Site,User");
+                var data = _unitOfWork.Reservation.List(null, null, "Site,User,Fees");
                 return Json(new { data });
             }
             catch (Exception ex)
