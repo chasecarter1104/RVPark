@@ -53,6 +53,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("FeeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("SiteId")
                         .HasColumnType("int");
 
@@ -64,6 +67,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FeeId");
 
                     b.HasIndex("SiteId");
 
@@ -381,6 +386,10 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("ApplicationCore.Models.Reservation", b =>
                 {
+                    b.HasOne("ApplicationCore.Models.Fee", "Fee")
+                        .WithMany()
+                        .HasForeignKey("FeeId");
+
                     b.HasOne("ApplicationCore.Models.Site", "Site")
                         .WithMany()
                         .HasForeignKey("SiteId")
@@ -392,6 +401,8 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Fee");
 
                     b.Navigation("Site");
 

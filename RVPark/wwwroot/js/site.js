@@ -37,13 +37,13 @@ function loadList() {
 
             {
                 data: "id", width: "30%",
-                "render": function (data) {
+                "render": function (data, type, row) {
                     return `<div class="text-center">
                             <a href="/Admin/Sites/Upsert?id=${data}"
                             class ="btn btn-success text-white style="cursor:pointer; width=100px;"> <i class="far fa-edit"></i>Edit</a>
                             <a href="javascript:void(0);" onClick="lockUnlockSite(${data})"
                             class="btn btn-danger text-white" style="cursor:pointer; width:100px;"> 
-                            <i class="far fa-lock"></i> ${row.isLocked ? "Unlock" : "Lock"}</a>
+                            <i class="fa fa-lock"></i> ${row.isLocked ? "Unlock" : "Lock"}</a>
                     </div>`;
                 }
             }

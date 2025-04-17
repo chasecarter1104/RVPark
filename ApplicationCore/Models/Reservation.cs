@@ -20,11 +20,14 @@ namespace ApplicationCore.Models
 
         public int SiteId { get; set; }
         public string UserId { get; set; }
+        public int? FeeId { get; set; }
 
         // Connect Objects or Tables
         [ForeignKey("SiteId")]
         public virtual Site Site { get; set; }
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
+        [ForeignKey("FeeId")]
+        public virtual Fee Fee { get; set; }
     }
 }

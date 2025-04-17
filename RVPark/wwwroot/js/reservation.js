@@ -18,8 +18,8 @@ function loadList() {
 
         },
         "columns": [
-            {data: "startDate"},
-            {data: "endDate"},
+            { data: "startDate", render: $.fn.dataTable.render.date() },
+            { data: "endDate", render: $.fn.dataTable.render.date() },
             {data: "site.name"},
             {data: "user.fullName"},
             {
