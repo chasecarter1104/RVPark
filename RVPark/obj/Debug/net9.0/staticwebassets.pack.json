@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\VS Studio 2022\\source\\repos\\RVPark\\RVPark\\wwwroot\\images\\RV_Park.jpg",
+      "PackagePath": "staticwebassets\\images\\RV_Park.jpg"
+    },
+    {
       "Id": "D:\\VS Studio 2022\\source\\repos\\RVPark\\RVPark\\wwwroot\\js\\fee.js",
       "PackagePath": "staticwebassets\\js\\fee.js"
     },

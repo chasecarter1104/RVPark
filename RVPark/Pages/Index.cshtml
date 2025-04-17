@@ -2,10 +2,30 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    var backgroundImageUrl = Url.Content("~/images/RV_Park.jpg");
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 
+<div class="content">
+    <h1>RV Park</h1>
+
+    <img src="@Url.Content("~/images/RV_Park.jpg")" alt="RV Park" style="max-width: 100%; border-radius: 10px;" />
+
+    @* @if (!Model.AvailableSites.Any())
+    {
+        <p>Sorry, no available sites today.</p>
+    }
+    else
+    {
+        <ul class="site-list">
+            @foreach (var site in Model.AvailableSites)
+            {
+                <li>
+                    Site #: @site.Name – Type: @site.SiteType?.Name ?? "Unknown Type"
+                </li>
+            }
+        </ul>
+    } *@
+    
+    
 </div>

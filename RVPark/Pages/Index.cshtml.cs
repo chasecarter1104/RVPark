@@ -1,24 +1,34 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
-namespace RVPark.Pages;
+using Infrastructure.Data;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using ApplicationCore.Interfaces;
+using ApplicationCore.Models;
 
 public class IndexModel : PageModel
 {
-    private readonly ILogger<IndexModel> _logger;
+    private readonly UnitOfWork _unitOfWork;
 
-    public IndexModel(ILogger<IndexModel> logger)
+    public IndexModel(UnitOfWork unitOfWork)
     {
-        _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
-    public void OnGet()
-    {
+    public List<Site> AvailableSites { get; set; }
 
-    }
-
-    public IActionResult OnPostGoToSitesIndex()
+    public async Task OnGetAsync()
     {
-        return RedirectToPage("/Admin/Sites/Index");
+        var today = DateTime.Today;
+
+        //var allSites = await _unitOfWork.Site.ListAsync(predicate: _ => true, includes: "SiteType");
+        //var reservations = await _unitOfWork.Reservation
+        //    .ListAsync(r => r.StartDate <= today && r.EndDate >= today);
+
+        //var reservedIds = reservations.Select(r => r.SiteId).ToHashSet();
+
+        //AvailableSites = allSites.Where(site => !reservedIds.Contains(site.Id)).ToList();
     }
 }
