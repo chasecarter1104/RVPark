@@ -1,13 +1,18 @@
 using ApplicationCore.Models;
-using ApplicationCore.Interfaces;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using System.Diagnostics;
+using System.Security.Claims;
+using ApplicationCore.Models;
+using Infrastructure.Data;
+using Infrastructure.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Identity.Client;
+using Stripe;
 
-namespace RVPark.Pages.Admin.Reservations
+namespace RVPark.Pages.Customer.Reservations
 {
     public class UpsertModel : PageModel
     {
@@ -19,6 +24,8 @@ namespace RVPark.Pages.Admin.Reservations
         // Creating these for a dropdown list
         public IEnumerable<SelectListItem> SiteList { get; set; }
         public IEnumerable<SelectListItem> UserList { get; set; }
+
+        public User User { get; set; }
 
         // Constructor injection
         public UpsertModel(UnitOfWork unitOfWork)
@@ -43,6 +50,8 @@ namespace RVPark.Pages.Admin.Reservations
 
             SiteList = sites.Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Name }).ToList();
             UserList = users.Select(u => new SelectListItem { Text = u.FullName, Value = u.Id.ToString() }).ToList();
+
+            User = users.First(c => c.Email == HttpContext.User.Identity?.Name);
         }
 
         public IActionResult OnPost(int? id)

@@ -37,13 +37,13 @@ function loadList() {
 
             {
                 data: "id", width: "30%",
-                "render": function (data) {
+                "render": function (data, type, row) {
                     return `<div class="text-center">
                             <a href="/Admin/Sites/Upsert?id=${data}"
                             class ="btn btn-success text-white style="cursor:pointer; width=100px;"> <i class="far fa-edit"></i>Edit</a>
-                            <a onClick="Delete('/api/site/'+${data})"
+                            <a href="javascript:void(0);" onClick="lockUnlockSite(${data})"
                             class="btn btn-danger text-white" style="cursor:pointer; width:100px;"> 
-                            <i class="far fa-trash-alt"></i> Delete</a>
+                            <i class="fa fa-lock"></i> ${row.isLocked ? "Unlock" : "Lock"}</a>
                     </div>`;
                 }
             }
@@ -80,4 +80,24 @@ function Delete(url) {
                 })
             }
         })
+}
+
+
+function lockUnlockSite(siteId) {
+    $.ajax({
+        url: `/api/site/lockunlock/${siteId}`, // API endpoint for lock/unlock
+        type: "POST", // Use POST for modifying data
+        success: function (response) {
+            if (response.success) {
+                toastr.success(response.message); // Show success notification
+                dataTable.ajax.reload(); // Reload the DataTable to reflect changes
+            } else {
+                toastr.error(response.message); // Show error notification
+            }
+        },
+        error: function (xhr) {
+            console.error("Error locking/unlocking site:", xhr.responseText);
+            toastr.error("An error occurred while processing the request.");
+        }
+    });
 }

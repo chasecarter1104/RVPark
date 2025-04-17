@@ -1,12 +1,12 @@
 ﻿@page
 @model RVPark.Pages.Admin.Roles.UpsertModel
 
-<form method="post" asp-action="Upsert">
+<form method="post">
 	<div class="container">
 		<div class="row px-2 mx-2 backgroundWhite border">
 			<div asp-validation-summary="All" class="text-danger"></div>
 			<div class="col-12 px-3" style="border-bottom: 1px solid #325d88">
-				<h2 class="text-primary">@(Model.RoleObj != null && Model.RoleObj.Id != 0 ? "Update" : "Create") Role</h2>
+				<h2 class="text-primary">@(!string.IsNullOrEmpty(Model.RoleObj?.Id) ? "Update" : "Create") Role</h2>
 			</div>
 			<div class="col-8 pt-3 px-3">
 				<div class="form-group row py-3">
@@ -18,7 +18,8 @@
 						<span class="text-danger" asp-validation-for="RoleObj.Name"></span>
 					</div>
 
-					@if (Model.RoleObj != null && Model.RoleObj.Id != 0)
+					@if (!string.IsNullOrEmpty(Model.RoleObj?.Id))
+
 					{
 						<input type="hidden" asp-for="RoleObj.Id" />
 					}
@@ -38,7 +39,7 @@
 						<div class="col-9 offset-3">
 							<div class="row">
 								<div class="col-6">
-									<button type="submit" class="btn btn-primary form-control">@(Model.RoleObj != null && Model.RoleObj.Id != 0 ? "Update" : "Create")</button>
+									<button type="submit" class="btn btn-primary form-control">@(!string.IsNullOrEmpty(Model.RoleObj?.Id) ? "Update" : "Create")</button>
 								</div>
 								<div class="col-6">
 									<a asp-page="./Index" class="btn btn-success form-control">Cancel</a>

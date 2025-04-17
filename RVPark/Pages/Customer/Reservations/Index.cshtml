@@ -1,0 +1,59 @@
+﻿@page
+@using System.Security.Claims
+@model RVPark.Pages.Customer.Reservations.IndexModel
+
+@{
+	ViewData["Title"] = "Reservations";
+}
+
+@if (!User.IsInRole("Customer") && !User.IsInRole("Admin") && !User.IsInRole("Employee"))
+{
+	Response.Redirect("../Identity/Account/Login");
+}
+
+<div class="border backgroundWhite container p-3">
+	<div class="row pt-4">
+		<div class="col-6">
+			<h2 class="text-primary">Reservation List</h2>
+		</div>
+		<div class="col-6 text-end">
+			<a asp-page="Upsert" asp-route-id="0" class="btn btn-primary">
+				<i class="fas fa-plus"></i>&nbsp; Create New
+			</a>
+		</div>
+		@if (User.IsInRole("Customer"))
+		{
+			<div class="customer" id="@Model.User.FullName"></div>
+		}
+		else
+		{
+			<div class="customer" id=""></div>
+		}
+	</div>
+
+	<table id="DT_load" class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th>
+					Start Date
+				</th>
+				<th>
+					End Date
+				</th>
+				<th>
+					Site Name
+				</th>
+				<th>
+					Full Name
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+
+	</table>
+</div>
+
+@section Scripts
+{
+	<script src="~/js/reservation.js"></script>
+}

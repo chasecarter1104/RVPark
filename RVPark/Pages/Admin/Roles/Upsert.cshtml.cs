@@ -4,47 +4,46 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Identity;
 namespace RVPark.Pages.Admin.Roles
 {
     public class UpsertModel : PageModel
     {
         private readonly UnitOfWork _unitOfWork;
-        private readonly IWebHostEnvironment _webhhostEnvironment;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         [BindProperty]
         public Role RoleObj { get; set; }
 
         public IEnumerable<SelectListItem> RoleObjList { get; set; }
 
-        public UpsertModel(UnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
+        public UpsertModel(UnitOfWork unitOfWork, RoleManager<IdentityRole> roleManager)
         {
             _unitOfWork = unitOfWork;
-            _webhhostEnvironment = hostEnvironment;
+            _roleManager = roleManager;
         }
 
-        public void OnGet(int? id)
+        public void OnGet(string? id)
         {
-
-            if (id != null) // edit version
+            if (!string.IsNullOrEmpty(id)) // edit version
             {
-                RoleObj = _unitOfWork.Role.Get(u=>u.Id == id) ?? new Role();
+                RoleObj = _unitOfWork.Role.Get(u => u.Id == id) ?? new Role();
             }
             else
             {
                 RoleObj = new Role();
             }
         }
-
         public IActionResult OnPost()
         {
-
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            if (RoleObj.Id == 0) // if new
+            if (string.IsNullOrEmpty(RoleObj.Id)) // if new
             {
+                RoleObj.Id = Guid.NewGuid().ToString(); // or let Identity generate one
                 _unitOfWork.Role.Add(RoleObj);
             }
             else // existing
@@ -55,6 +54,5 @@ namespace RVPark.Pages.Admin.Roles
             _unitOfWork.Commit();
             return RedirectToPage("./Index");
         }
-
     }
 }

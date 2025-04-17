@@ -16,7 +16,16 @@ namespace ApplicationCore.Models
         public string Name { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Price should be at least $1")]
         public int Price { get; set; }
 
+        [Required]
+        [Display(Name = "Start Date")]
+        public DateTime StartDate { get; set; }
+
+        [Display(Name = "End Date")]
+        public DateTime? EndDate { get; set; }
+
+        public bool IsLocked { get; set; }
     }
 }

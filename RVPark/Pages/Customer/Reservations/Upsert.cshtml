@@ -1,5 +1,5 @@
 ﻿@page
-@model RVPark.Pages.Admin.Reservations.UpsertModel
+@model RVPark.Pages.Customer.Reservations.UpsertModel
 
 <form method="post" asp-action="Upsert">
     <div class="container">
@@ -44,10 +44,8 @@
                         <label asp-for="Reservation.UserId">User</label>
                     </div>
                     <div class="col-9">
-                        @Html.DropDownListFor(m => m.Reservation.UserId,
-                                 Model.UserList,
-                                 " - Please select a user - ",
-                                 new { @class = "form-control", id = "Reservation_UserId" })
+	                    <input value="@Model.User.FullName" disabled />
+                        <input type="hidden" class="form-control" asp-for="Reservation.UserId" id="Reservation_UserId" value="@Model.User.Id" />
                         <span class="text-danger" asp-validation-for="Reservation.UserId"></span>
                     </div>
                 </div>
@@ -70,14 +68,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-3">
-                        <label>Total Price</label>
-                    </div>
-                    <div class="col-9">
-                        <input type="text" id="TotalPrice" class="form-control" readonly />
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -94,13 +84,7 @@
             fetchAvailableSites();
         });
 
-        document.getElementById("Reservation_EndDate").addEventListener("change", function () {
-            fetchAvailableSites();
-        });
-
-        document.getElementById("Reservation_SiteId").addEventListener("change", function() {
-            calculateTotalPrice();
-        });
+        document.getElementById("Reservation_EndDate").addEventListener("change", fetchAvailableSites);
     });
 
     function fetchAvailableSites() {
@@ -124,58 +108,23 @@
         }
     }
 
-    function calculateTotalPrice() {
-        // 1. Get the values
-        const startDate = document.getElementById("Reservation_StartDate").value;
-        const endDate = document.getElementById("Reservation_EndDate").value;
-        const siteId = document.getElementById("Reservation_SiteId").value;
-
-        // 2. Only calculate if we have all required values
-        if (!startDate || !endDate || !siteId) {
-            document.getElementById("TotalPrice").value = "$0.00";
-            return;
-        }
-
-        // 3. Calculate days difference (INCLUSIVE)
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        const diffDays = Math.floor((end - start) / (1000 * 60 * 60 * 24)) + 1;
-
-        // 4. Get price and calculate total
-        fetch(`/api/Reservation/SitePrice?siteId=${siteId}`)
-            .then(response => response.json())
-            .then(data => {
-                const total = data.price * diffDays;
-                document.getElementById("TotalPrice").value = `$${total.toFixed(2)}`;
-            })
-            .catch(error => {
-                console.error("Failed to calculate price:", error);
-                document.getElementById("TotalPrice").value = "$0.00";
-            });
-    }
-
-    // Call this whenever ANY input changes
-    document.getElementById("Reservation_StartDate").addEventListener("change", calculateTotalPrice);
-    document.getElementById("Reservation_EndDate").addEventListener("change", calculateTotalPrice);
-    document.getElementById("Reservation_SiteId").addEventListener("change", calculateTotalPrice);
-
-    // Calculate immediately if editing existing reservation
-    calculateTotalPrice();
-
-    function ValidateInput() {
-        if ($('#Reservation_SiteId option:selected').val() == "") {
-            swal('Error', 'Please Select a Site', 'error')
-            return false;
-        }
-        if ($('#Reservation_UserId option:selected').val() == "") {
-            swal('Error', 'Please Select a User', 'error')
-            return false;
-        }
-    }
 
     tinymce.init({
         selector: 'textarea',
         plugins: "lists",
         menubar: "file edit format"
     });
+
+    function ValidateInput() {
+
+        if ($('#Reservation_SiteId option:selected').val() == ""){
+            swal('Error', 'Please Select a Site', 'error')
+            return false;
+        }
+        if ($('#Reservation_UserId option:selected').val() == ""){
+            swal('Error', 'Please Select a User', 'error')
+            return false;
+        }
+    }
+
 </script>
