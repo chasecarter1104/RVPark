@@ -1,7 +1,6 @@
 using System.Security.Claims;
 using ApplicationCore.Models;
 using Infrastructure.Data;
-using Infrastructure.Migrations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.RazorPages;
