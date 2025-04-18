@@ -1,5 +1,6 @@
 using ApplicationCore.Models;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,24 +8,24 @@ namespace RVPark.Pages.Admin.Roles
 {
     public class IndexModel : PageModel
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly RoleManager<Role> _roleManager;
 
-        public IndexModel(UnitOfWork unitOfWork)
+        public IndexModel(RoleManager<Role> roleManager)
         {
-            _unitOfWork = unitOfWork;
+            _roleManager = roleManager;
         }
 
-        public IEnumerable<Role> Roles { get; set; }
+        public IEnumerable<Role> RolesObj { get; set; }
         public bool Success { get; set; }
         public string Message { get; set; }
 
-        public void OnGet(bool success = false, string message = null)
+        public async Task OnGetAsync(bool success = false, string message = null)
         {
             Success = success;
             Message = message;
-            Roles = _unitOfWork.Role.List();
-        }
+            RolesObj = _roleManager.Roles;
 
-       
+        }
     }
+
 }

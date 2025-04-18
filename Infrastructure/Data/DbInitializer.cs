@@ -10,9 +10,9 @@ namespace Infrastructure.Data
     {
         private readonly ApplicationDbContext _db;
         private readonly UserManager<IdentityUser> _userManager; // ✅ Use custom User class
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<Role> _roleManager;
 
-        public DbInitializer(ApplicationDbContext db, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public DbInitializer(ApplicationDbContext db, UserManager<IdentityUser> userManager, RoleManager<Role> roleManager)
         {
             _db = db;
             _userManager = userManager;
@@ -41,9 +41,9 @@ namespace Infrastructure.Data
             }
 
             // Create roles
-            _roleManager.CreateAsync(new IdentityRole(SD.AdminRole)).GetAwaiter().GetResult();
-            _roleManager.CreateAsync(new IdentityRole(SD.EmployeeRole)).GetAwaiter().GetResult();
-            _roleManager.CreateAsync(new IdentityRole(SD.CustomerRole)).GetAwaiter().GetResult();
+            _roleManager.CreateAsync(new Role { Name = SD.AdminRole, NormalizedName = SD.AdminRole.ToUpper(), Description = "Admin role" }).GetAwaiter().GetResult();
+            _roleManager.CreateAsync(new Role { Name = SD.EmployeeRole, NormalizedName = SD.EmployeeRole.ToUpper(), Description = "Employee role" }).GetAwaiter().GetResult();
+            _roleManager.CreateAsync(new Role { Name = SD.CustomerRole, NormalizedName = SD.CustomerRole.ToUpper(), Description = "Customer role" }).GetAwaiter().GetResult();
 
             // Create default admin user using your custom User class
             _userManager.CreateAsync(new User

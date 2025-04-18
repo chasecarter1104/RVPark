@@ -1,54 +1,27 @@
 ﻿@page
 @model RVPark.Pages.Admin.Roles.UpsertModel
+@{
+}
+<div class="container border backgroundWhite">
+    <form method="post">
+        <input type="hidden" asp-for="CurrentRole.Id" />
 
-<form method="post">
-	<div class="container">
-		<div class="row px-2 mx-2 backgroundWhite border">
-			<div asp-validation-summary="All" class="text-danger"></div>
-			<div class="col-12 px-3" style="border-bottom: 1px solid #325d88">
-				<h2 class="text-primary">@(!string.IsNullOrEmpty(Model.RoleObj?.Id) ? "Update" : "Create") Role</h2>
-			</div>
-			<div class="col-8 pt-3 px-3">
-				<div class="form-group row py-3">
-					<div class="col-3">
-						<label asp-for="RoleObj.Name" class="control-label"></label>
-					</div>
-					<div class="col-9">
-						<input class="form-control" asp-for="RoleObj.Name" />
-						<span class="text-danger" asp-validation-for="RoleObj.Name"></span>
-					</div>
+        <div class="form-group">
+            <label asp-for="CurrentRole.Name">Role Name</label>
+            <input asp-for="CurrentRole.Name" class="form-control" />
+            <span asp-validation-for="CurrentRole.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description">Description</label>
+            <input asp-for="Description" class="form-control" />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">
+            @(Model.IsUpdate ? "Update" : "Create")
+        </button>
+    </form>
+</div>
 
-					@if (!string.IsNullOrEmpty(Model.RoleObj?.Id))
-
-					{
-						<input type="hidden" asp-for="RoleObj.Id" />
-					}
-				</div>
-				<div class="form-group row py-3">
-					<div class="col-3">
-						<label asp-for="RoleObj.Description" class="control-label">Description</label>
-					</div>
-					<div class="col-9">
-						<input class="form-control" asp-for="RoleObj.Description" />
-						<span class="text-danger" asp-validation-for="RoleObj.Description"></span>
-					</div>
-				</div>
-				
-				<div class="form-group row py-3">
-					<div class="row">
-						<div class="col-9 offset-3">
-							<div class="row">
-								<div class="col-6">
-									<button type="submit" class="btn btn-primary form-control">@(!string.IsNullOrEmpty(Model.RoleObj?.Id) ? "Update" : "Create")</button>
-								</div>
-								<div class="col-6">
-									<a asp-page="./Index" class="btn btn-success form-control">Cancel</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
