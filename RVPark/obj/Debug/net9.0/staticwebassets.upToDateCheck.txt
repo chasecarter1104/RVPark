@@ -1272,7 +1272,6 @@ D:\VS Studio 2022\source\repos\RVPark\RVPark\wwwroot\lib\fontawesome\svgs\solid\
 D:\VS Studio 2022\source\repos\RVPark\RVPark\wwwroot\lib\fontawesome\svgs\solid\house-chimney-medical.svg
 D:\VS Studio 2022\source\repos\RVPark\RVPark\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
 D:\VS Studio 2022\source\repos\RVPark\RVPark\wwwroot\lib\fontawesome\svgs\solid\couch.svg
-D:\VS Studio 2022\source\repos\RVPark\RVPark\wwwroot\js\role.js
 D:\VS Studio 2022\source\repos\RVPark\RVPark\wwwroot\lib\fontawesome\js\all.js
 D:\VS Studio 2022\source\repos\RVPark\RVPark\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
 D:\VS Studio 2022\source\repos\RVPark\RVPark\wwwroot\lib\fontawesome\svgs\brands\sitrox.svg
@@ -2290,7 +2289,6 @@ wwwroot\favicon.ico
 wwwroot\images\RV_Park.jpg
 wwwroot\js\fee.js
 wwwroot\js\reservation.js
-wwwroot\js\role.js
 wwwroot\js\site.js
 wwwroot\js\sitetype.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
