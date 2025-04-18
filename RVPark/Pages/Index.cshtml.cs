@@ -23,12 +23,12 @@ public class IndexModel : PageModel
     {
         var today = DateTime.Today;
 
-        //var allSites = await _unitOfWork.Site.ListAsync(predicate: _ => true, includes: "SiteType");
-        //var reservations = await _unitOfWork.Reservation
-        //    .ListAsync(r => r.StartDate <= today && r.EndDate >= today);
+        var allSites = await _unitOfWork.Site.ListAsync(predicate: _ => true, includes: "SiteType");
+        var reservations = await _unitOfWork.Reservation
+            .ListAsync(r => r.StartDate <= today && r.EndDate >= today);
 
-        //var reservedIds = reservations.Select(r => r.SiteId).ToHashSet();
+        var reservedIds = reservations.Select(r => r.SiteId).ToHashSet();
 
-        //AvailableSites = allSites.Where(site => !reservedIds.Contains(site.Id)).ToList();
+        AvailableSites = allSites.Where(site => !reservedIds.Contains(site.Id)).ToList();
     }
 }
