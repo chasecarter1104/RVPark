@@ -17,7 +17,7 @@ namespace RVPark.Controllers
         {
             try
             {
-                var data = _unitOfWork.Reservation.List(null, null, "Site,User");
+                var data = _unitOfWork.Reservation.List(null, null, "Site,User,Fees");
                 return Json(new { data });
             }
             catch (Exception ex)
@@ -65,6 +65,19 @@ namespace RVPark.Controllers
                 .ToList();
 
             return Json(availableSites);
+        }
+
+
+        [HttpGet("SitePrice")]
+        public IActionResult GetSitePrice(int siteId)
+        {
+            var site = _unitOfWork.Site.Get(s => s.Id == siteId, includes: "SiteType");
+            if (site == null || site.SiteType == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new { price = site.SiteType.Price });
         }
     }
 }

@@ -1,7 +1,6 @@
 using ApplicationCore.Models;
 using ApplicationCore.Interfaces;
 using Infrastructure.Data;
-using ApplicationCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -20,6 +19,7 @@ namespace RVPark.Pages.Admin.Reservations
         // Creating these for a dropdown list
         public IEnumerable<SelectListItem> SiteList { get; set; }
         public IEnumerable<SelectListItem> UserList { get; set; }
+        public IEnumerable<SelectListItem> FeeList { get; set; }
 
         // Constructor injection
         public UpsertModel(UnitOfWork unitOfWork)
@@ -29,8 +29,9 @@ namespace RVPark.Pages.Admin.Reservations
 
         public void OnGet(int? id)
         {
-            var sites = _unitOfWork.Site.List(); //Move this outside
-            var users = _unitOfWork.User.List(); //Move this outside
+            var sites = _unitOfWork.Site.List(); 
+            var users = _unitOfWork.User.List(); 
+            var fees = _unitOfWork.Fee.List(); 
 
             if (id != null)
             {
@@ -44,6 +45,8 @@ namespace RVPark.Pages.Admin.Reservations
 
             SiteList = sites.Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Name }).ToList();
             UserList = users.Select(u => new SelectListItem { Text = u.FullName, Value = u.Id.ToString() }).ToList();
+            FeeList = fees.Select(f => new SelectListItem { Value = f.Id.ToString(), Text = f.Name }).ToList();
+
         }
 
         public IActionResult OnPost(int? id)

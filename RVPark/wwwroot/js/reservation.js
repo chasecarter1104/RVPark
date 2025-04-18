@@ -26,8 +26,15 @@ function loadList() {
                 { data: "site.name" },
                 { data: "user.fullName" },
                 {
+                    data: "fees",
+                    render: function (data) {
+                        if (!Array.isArray(data)) return "";
+                        return data.map(fee => fee.name).join(', ');
+                    }
+                },
+                {
                     data: "id",
-                    width: "30%",
+                    width: "25%",
                     "render": function(data) {
                         return `
                         <div class="text-center">
@@ -70,8 +77,15 @@ function loadList() {
                 { data: "site.name" },
                 { data: "user.fullName" },
                 {
+                    data: "fees",
+                    render: function (data) {
+                        if (!Array.isArray(data)) return "";
+                        return data.map(fee => fee.name).join(', ');
+                    }
+                },
+                {
                     data: "id",
-                    width: "30%",
+                    width: "20%",
                     "render": function(data) {
                         return `
                         <div class="text-center">

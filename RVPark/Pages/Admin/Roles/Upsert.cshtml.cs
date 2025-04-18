@@ -9,50 +9,92 @@ namespace RVPark.Pages.Admin.Roles
 {
     public class UpsertModel : PageModel
     {
-        private readonly UnitOfWork _unitOfWork;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<Role> _roleManager;
 
-        [BindProperty]
-        public Role RoleObj { get; set; }
-
-        public IEnumerable<SelectListItem> RoleObjList { get; set; }
-
-        public UpsertModel(UnitOfWork unitOfWork, RoleManager<IdentityRole> roleManager)
+        public UpsertModel(RoleManager<Role> roleManager)
         {
-            _unitOfWork = unitOfWork;
             _roleManager = roleManager;
         }
 
-        public void OnGet(string? id)
+        [BindProperty]
+        public Role CurrentRole { get; set; }
+        [BindProperty]
+        public bool IsUpdate { get; set; }
+        [BindProperty]
+        public string Description { get; set; }
+
+        public async Task OnGetAsync(string? id)
         {
-            if (!string.IsNullOrEmpty(id)) // edit version
+            if (id != null)
             {
-                RoleObj = _unitOfWork.Role.Get(u => u.Id == id) ?? new Role();
+                var role = await _roleManager.FindByIdAsync(id);
+                if (role != null)
+                {
+                    CurrentRole = new Role
+                    {
+                        Id = role.Id,
+                        Name = role.Name,
+                        NormalizedName = role.NormalizedName,
+                        Description = role.Description // Use custom 'Description' property
+                    };
+                    Description = CurrentRole.Description;
+                    IsUpdate = true;
+                }
             }
             else
             {
-                RoleObj = new Role();
+                CurrentRole = new Role();
+                IsUpdate = false;
             }
         }
-        public IActionResult OnPost()
+
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
-            {
                 return Page();
-            }
 
-            if (string.IsNullOrEmpty(RoleObj.Id)) // if new
+            if (string.IsNullOrEmpty(CurrentRole.Id))
             {
-                RoleObj.Id = Guid.NewGuid().ToString(); // or let Identity generate one
-                _unitOfWork.Role.Add(RoleObj);
-            }
-            else // existing
-            {
-                _unitOfWork.Role.Update(RoleObj);
-            }
+                // Creating a new role
+                CurrentRole.NormalizedName = CurrentRole.Name.ToUpper();
+                CurrentRole.Description = Description;
 
-            _unitOfWork.Commit();
-            return RedirectToPage("./Index");
+                var result = await _roleManager.CreateAsync(CurrentRole);
+
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                        ModelState.AddModelError(string.Empty, error.Description);
+
+                    return Page();
+                }
+
+                return RedirectToPage("./Index", new { success = true, message = "Successfully Added" });
+            }
+            else
+            {
+                // Updating an existing role
+                var roleFromDb = await _roleManager.FindByIdAsync(CurrentRole.Id);
+
+                if (roleFromDb == null)
+                    return NotFound();
+
+                roleFromDb.Name = CurrentRole.Name;
+                roleFromDb.NormalizedName = CurrentRole.Name.ToUpper();
+                roleFromDb.Description = Description;
+
+                var result = await _roleManager.UpdateAsync(roleFromDb);
+
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                        ModelState.AddModelError(string.Empty, error.Description);
+
+                    return Page();
+                }
+
+                return RedirectToPage("./Index", new { success = true, message = "Update Successful" });
+            }
         }
     }
 }

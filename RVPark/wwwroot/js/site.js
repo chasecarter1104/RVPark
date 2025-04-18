@@ -23,7 +23,8 @@ function loadList() {
         "columns": [
             { data: "name" },
             { data: "maxLength", "render": $.fn.dataTable.render.number(',', '.', 2, '', ' ft'), width: "15%" },
-            { data: "siteType.id" },
+            { data: "siteType.name" },
+            { data: "description" },
             {
                 data: "imageUrl",
                 render: function (data) {

@@ -1,19 +1,21 @@
+using ApplicationCore.Models;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace FoodDelivery.Pages.Admin.Roles
+namespace RVPark.Pages.Admin.Roles
 {
     public class IndexModel : PageModel
     {
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<Role> _roleManager;
 
-        public IndexModel(RoleManager<IdentityRole> roleManager)
+        public IndexModel(RoleManager<Role> roleManager)
         {
             _roleManager = roleManager;
         }
 
-        public IEnumerable<IdentityRole> RolesObj { get; set; }
+        public IEnumerable<Role> RolesObj { get; set; }
         public bool Success { get; set; }
         public string Message { get; set; }
 
