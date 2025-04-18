@@ -4,6 +4,8 @@
 }
 <div class="container border backgroundWhite">
     <form method="post">
+
+
         <input type="hidden" asp-for="CurrentRole.Id" />
 
         <div class="form-group">
@@ -15,7 +17,9 @@
         <div class="form-group">
             <label asp-for="CurrentRole.Description">Description</label>
             <input asp-for="CurrentRole.Description" class="form-control" />
+            <span asp-validation-for="CurrentRole.Description" class="text-danger"></span>
         </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
         <br />
         <button type="submit" class="btn btn-primary">
             @(Model.IsUpdate ? "Update" : "Create")
