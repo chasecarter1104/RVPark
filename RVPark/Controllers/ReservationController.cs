@@ -40,7 +40,7 @@ namespace RVPark.Controllers
         }
 
         [HttpGet("AvailableSites")]
-        public IActionResult GetAvailableSites([FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate)
+        public IActionResult GetAvailableSites([FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate, [FromQuery] float? trailerLength)
         {
             if (!startDate.HasValue || !endDate.HasValue)
             {
@@ -60,7 +60,8 @@ namespace RVPark.Controllers
 
             var availableSites = _unitOfWork.Site
                 .List()
-                .Where(s => !reservedSiteIds.Contains(s.Id))
+                .Where(s => !reservedSiteIds.Contains(s.Id)
+                            && (!trailerLength.HasValue || s.MaxLength >= trailerLength.Value))
                 .Select(s => new { s.Id, s.Name })
                 .ToList();
 

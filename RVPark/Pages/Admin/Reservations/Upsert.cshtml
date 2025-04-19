@@ -31,15 +31,22 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-3">
+                        <label for="TrailerLength">Trailer Length (ft)</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="number" id="TrailerLength" name="TrailerLength" class="form-control" min="1" required />
+                        <span class="text-danger" id="TrailerLengthError" style="display:none;">Please enter the trailer length.</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
                         <label asp-for="Reservation.SiteId">Site</label>
                     </div>
                     <div class="col-9">
-                        <select asp-for="Reservation.SiteId"
-                                asp-items="Model.SiteList"
-                                class="form-control"
-                                id="Reservation_SiteId">
-                            <option value=""> - Please select a site - </option>
-                        </select>
+                        @Html.DropDownListFor(m => m.Reservation.SiteId,
+                                 Model.SiteList,
+                                 " - Please select a site - ",
+                                 new { @class = "form-control", id = "Reservation_SiteId" })
                         <span class="text-danger" asp-validation-for="Reservation.SiteId"></span>
                     </div>
                 </div>
@@ -48,12 +55,10 @@
                         <label asp-for="Reservation.UserId">User</label>
                     </div>
                     <div class="col-9">
-                        <select asp-for="Reservation.UserId"
-                                asp-items="Model.UserList"
-                                class="form-control"
-                                id="Reservation_UserId">
-                            <option value=""> - Please select a user - </option>
-                        </select>
+                        @Html.DropDownListFor(m => m.Reservation.UserId,
+                                 Model.UserList,
+                                 " - Please select a user - ",
+                                 new { @class = "form-control", id = "Reservation_UserId" })
                         <span class="text-danger" asp-validation-for="Reservation.UserId"></span>
                     </div>
                 </div>
@@ -111,6 +116,9 @@
         document.getElementById("Reservation_EndDate").addEventListener("change", function () {
             fetchAvailableSites();
         });
+        document.getElementById("TrailerLength").addEventListener("input", function () {
+            fetchAvailableSites();
+        });
 
         document.getElementById("Reservation_SiteId").addEventListener("change", function() {
             calculateTotalPrice();
@@ -124,9 +132,15 @@
     function fetchAvailableSites() {
         var startDate = document.getElementById("Reservation_StartDate").value;
         var endDate = document.getElementById("Reservation_EndDate").value;
+        var trailerLength = document.getElementById("TrailerLength").value;
 
         if (startDate && endDate) {
-            fetch(`/api/Reservation/AvailableSites?startDate=${startDate}&endDate=${endDate}`)
+            let url = `/api/Reservation/AvailableSites?startDate=${startDate}&endDate=${endDate}`;
+            if (trailerLength) {
+                url += `&trailerLength=${trailerLength}`;
+            }
+
+            fetch(url)
                 .then(response => response.json())
                 .then(data => {
                     var siteDropdown = document.getElementById("Reservation_SiteId");
@@ -137,6 +151,9 @@
                         option.textContent = site.name;
                         siteDropdown.appendChild(option);
                     });
+
+                    // Recalculate price just in case
+                    calculateTotalPrice();
                 })
                 .catch(error => console.error('Error fetching sites:', error));
         }
@@ -182,13 +199,24 @@
     calculateTotalPrice();
 
     function ValidateInput() {
+        let isValid = true;
+
         if ($('#Reservation_SiteId option:selected').val() == "") {
-            swal('Error', 'Please Select a Site', 'error')
-            return false;
+            swal('Error', 'Please Select a Site', 'error');
+            isValid = false;
         }
+
         if ($('#Reservation_UserId option:selected').val() == "") {
-            swal('Error', 'Please Select a User', 'error')
-            return false;
+            swal('Error', 'Please Select a User', 'error');
+            isValid = false;
         }
+
+        const trailerLength = document.getElementById("TrailerLength").value;
+        if (!trailerLength || parseFloat(trailerLength) <= 0) {
+            swal('Error', 'Please enter a valid Trailer Length.', 'error');
+            isValid = false;
+        }
+
+        return isValid;
     }
 </script>
