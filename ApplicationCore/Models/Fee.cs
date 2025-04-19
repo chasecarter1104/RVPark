@@ -18,5 +18,7 @@ namespace ApplicationCore.Models
         [Range(0, float.MaxValue)]
         public float FeeAmount { get; set; }
 
+        public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
+
     }
 }
