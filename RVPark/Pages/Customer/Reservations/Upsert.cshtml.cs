@@ -24,6 +24,9 @@ namespace RVPark.Pages.Customer.Reservations
         // Creating these for a dropdown list
         public IEnumerable<SelectListItem> SiteList { get; set; }
         public IEnumerable<SelectListItem> UserList { get; set; }
+        public IEnumerable<SelectListItem> FeeList { get; set; }
+
+        public float TotalCost { get; set; }
 
         public User User { get; set; }
 
@@ -35,8 +38,9 @@ namespace RVPark.Pages.Customer.Reservations
 
         public void OnGet(int? id)
         {
-            var sites = _unitOfWork.Site.List(); //Move this outside
-            var users = _unitOfWork.User.List(); //Move this outside
+            var sites = _unitOfWork.Site.List();
+            var users = _unitOfWork.User.List();
+            var fees = _unitOfWork.Fee.List();
 
             if (id != null)
             {
@@ -50,6 +54,7 @@ namespace RVPark.Pages.Customer.Reservations
 
             SiteList = sites.Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Name }).ToList();
             UserList = users.Select(u => new SelectListItem { Text = u.FullName, Value = u.Id.ToString() }).ToList();
+            FeeList = fees.Select(f => new SelectListItem { Value = f.Id.ToString(), Text = f.Name }).ToList();
 
             User = users.First(c => c.Email == HttpContext.User.Identity?.Name);
         }
@@ -72,7 +77,7 @@ namespace RVPark.Pages.Customer.Reservations
             _unitOfWork.Commit();
 
             // Redirect
-            return RedirectToPage("./Index");
+            return RedirectToPage();
         }
     }
 }

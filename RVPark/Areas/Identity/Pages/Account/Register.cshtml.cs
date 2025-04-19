@@ -31,7 +31,7 @@ namespace RVPark.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<Role> _roleManager;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -39,7 +39,7 @@ namespace RVPark.Areas.Identity.Pages.Account
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<Role> roleManager)
         {
             _userManager = userManager;
             _userStore = userStore;

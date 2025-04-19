@@ -24,8 +24,19 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, Role, string
 
         modelBuilder.Entity<Reservation>()
             .HasMany(r => r.Fees)
-            .WithOne()
-            .HasForeignKey(f => f.Id);
+            .WithMany(f => f.Reservations)
+            .UsingEntity<Dictionary<string, object>>(
+                "ReservationFee",
+                j => j
+                    .HasOne<Fee>()
+                    .WithMany()
+                    .HasForeignKey("FeeId")
+                    .OnDelete(DeleteBehavior.Cascade),
+                j => j
+                    .HasOne<Reservation>()
+                    .WithMany()
+                    .HasForeignKey("ReservationId")
+                    .OnDelete(DeleteBehavior.Cascade));
 
         // Ensuring the Discriminator is set for the custom Role class
         modelBuilder.Entity<Role>()

@@ -23,7 +23,12 @@ namespace RVPark.Pages.Admin.Roles
         {
             Success = success;
             Message = message;
-            RolesObj = _roleManager.Roles;
+            RolesObj = _roleManager.Roles.Select(r => new Role
+            {
+                Id = r.Id,
+                Name = r.Name,
+                Description = r.Description
+            }).ToList();
 
         }
     }

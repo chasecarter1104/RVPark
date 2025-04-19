@@ -11,21 +11,62 @@
 
     <img src="@Url.Content("~/images/RV_Park.jpg")" alt="RV Park" style="max-width: 100%; border-radius: 10px;" />
 
-    @* @if (!Model.AvailableSites.Any())
+    <h3>Filter</h3>
+    <form method="get" class="d-flex gap-3 align-items-end mb-4 flex-wrap">
+
+        <div class="d-flex flex-column">
+            <label class="mb-1">Start Date</label>
+            <input asp-for="FilterStartDate" type="date" class="form-control" />
+        </div>
+
+        <div class="d-flex flex-column">
+            <label class="mb-1">End Date</label>
+            <input asp-for="FilterEndDate" type="date" class="form-control" />
+        </div>
+
+        <div class="d-flex flex-column">
+            <label class="mb-1">Site Type</label>
+            <select asp-for="FilterSiteTypeId" asp-items="Model.SiteTypeList" class="form-control">
+                <option value="">-- All Types --</option>
+            </select>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </form>
+
+
+     @if (!Model.AvailableSites.Any())
     {
-        <p>Sorry, no available sites today.</p>
+        <h3>Sorry, no available sites today.</h3>
     }
     else
     {
-        <ul class="site-list">
+        <h3>Available Sites</h3>
+        <ul class="list-group">
             @foreach (var site in Model.AvailableSites)
             {
-                <li>
-                    Site #: @site.Name – Type: @site.SiteType?.Name ?? "Unknown Type"
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>
+                        Site: @site.Name – Type: @site.SiteType?.Name
+                    </span>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-page="/Customer/Reservations/Upsert" asp-route-siteId="@site.Id" class="btn btn-primary">
+                            Reserve
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Page("/Customer/Reservations/Upsert", new { siteId = site.Id })" class="btn btn-outline-warning">
+                            Login to Reserve
+                        </a>
+                    }
                 </li>
             }
         </ul>
-    } *@
+    } 
     
     
 </div>

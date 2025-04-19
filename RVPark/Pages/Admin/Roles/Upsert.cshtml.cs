@@ -18,33 +18,26 @@ namespace RVPark.Pages.Admin.Roles
 
         [BindProperty]
         public Role CurrentRole { get; set; }
-        [BindProperty]
         public bool IsUpdate { get; set; }
-        [BindProperty]
-        public string Description { get; set; }
 
         public async Task OnGetAsync(string? id)
         {
-            if (id != null)
+            if (string.IsNullOrWhiteSpace(id)) // Create mode
+            {
+                CurrentRole = new Role();// Initialize empty role
+                IsUpdate = false;         // Indicate "create" mode
+            }
+            else // Update mode
             {
                 var role = await _roleManager.FindByIdAsync(id);
-                if (role != null)
+                if (role == null)
                 {
-                    CurrentRole = new Role
-                    {
-                        Id = role.Id,
-                        Name = role.Name,
-                        NormalizedName = role.NormalizedName,
-                        Description = role.Description // Use custom 'Description' property
-                    };
-                    Description = CurrentRole.Description;
-                    IsUpdate = true;
+                    RedirectToPage("./Index", new { success = true, message = "Role created successfully" });
+                    return;
                 }
-            }
-            else
-            {
-                CurrentRole = new Role();
-                IsUpdate = false;
+
+                CurrentRole = role; // Load existing role
+                IsUpdate = true;    // Indicate "update" mode
             }
         }
 
@@ -53,47 +46,37 @@ namespace RVPark.Pages.Admin.Roles
             if (!ModelState.IsValid)
                 return Page();
 
-            if (string.IsNullOrEmpty(CurrentRole.Id))
-            {
-                // Creating a new role
-                CurrentRole.NormalizedName = CurrentRole.Name.ToUpper();
-                CurrentRole.Description = Description;
+            // Check if the role exists in the database
+            var existingRole = await _roleManager.FindByIdAsync(CurrentRole.Id);
 
+            if (existingRole == null) // It's a NEW role
+            {
                 var result = await _roleManager.CreateAsync(CurrentRole);
 
                 if (!result.Succeeded)
                 {
                     foreach (var error in result.Errors)
                         ModelState.AddModelError(string.Empty, error.Description);
-
                     return Page();
                 }
 
-                return RedirectToPage("./Index", new { success = true, message = "Successfully Added" });
+                return RedirectToPage("./Index", new { success = true, message = "Role created successfully" });
             }
-            else
+            else // It's an EDIT
             {
-                // Updating an existing role
-                var roleFromDb = await _roleManager.FindByIdAsync(CurrentRole.Id);
+                existingRole.Name = CurrentRole.Name;
+                existingRole.Description = CurrentRole.Description;
 
-                if (roleFromDb == null)
-                    return NotFound();
-
-                roleFromDb.Name = CurrentRole.Name;
-                roleFromDb.NormalizedName = CurrentRole.Name.ToUpper();
-                roleFromDb.Description = Description;
-
-                var result = await _roleManager.UpdateAsync(roleFromDb);
+                var result = await _roleManager.UpdateAsync(existingRole);
 
                 if (!result.Succeeded)
                 {
                     foreach (var error in result.Errors)
                         ModelState.AddModelError(string.Empty, error.Description);
-
                     return Page();
                 }
 
-                return RedirectToPage("./Index", new { success = true, message = "Update Successful" });
+                return RedirectToPage("./Index", new { success = true, message = "Role updated successfully" });
             }
         }
     }

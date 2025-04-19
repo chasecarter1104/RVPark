@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ApplicationCore.Models
@@ -17,6 +18,9 @@ namespace ApplicationCore.Models
 
         [Range(0, float.MaxValue)]
         public float FeeAmount { get; set; }
+
+        [JsonIgnore]
+        public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 
     }
 }

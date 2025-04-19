@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Infrastructure.Data;
-using Org.BouncyCastle.Asn1.X509;
 namespace RVPark.Pages.Admin.Sites
 {
     public class UpsertModel : PageModel
@@ -13,9 +12,7 @@ namespace RVPark.Pages.Admin.Sites
         private readonly IWebHostEnvironment _webhhostEnvironment;
 
         [BindProperty]
-        public Site SiteObj { get; set; }
-        [BindProperty]
-        public IFormFile? ImageFile { get; set; }
+        public Site Site { get; set; }
 
 
         public IEnumerable<SelectListItem> SiteTypeList { get; set; }
@@ -28,63 +25,39 @@ namespace RVPark.Pages.Admin.Sites
 
         public void OnGet(int? id)
         {
-            LoadSiteTypes();
-
-            if (id != null) // edit version
+            if (id != null)
             {
-                SiteObj = _unitOfWork.Site.Get(u => u.Id == id) ?? new Site();
+                Site = _unitOfWork.Site.Get(u => u.Id == id, true);
+
+                var SiteType = _unitOfWork.SiteType.List();
+
+                SiteTypeList = SiteType.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name });
+            }
+            if (Site == null) //new upsert
+            {
+                Site = new();
+            }
+        }
+
+        public IActionResult OnPost(int? id)
+        {
+            if (Site.Id == 0)
+            {
+                // Add new reservation to the database
+                _unitOfWork.Site.Add(Site);
             }
             else
             {
-                SiteObj = new Site();
-            }
-        }
-
-        public IActionResult OnPost()
-        {
-            LoadSiteTypes();
-            string webRootPath = _webhhostEnvironment.WebRootPath;
-            var files = HttpContext.Request.Form.Files;
-
-            if (!ModelState.IsValid)
-            {
-                return Page();
+                // Update existing reservation
+                var objFromDb = _unitOfWork.Site.Get(r => r.Id == Site.Id, true);
+                _unitOfWork.Site.Update(Site);
             }
 
-            if (SiteObj.Id == 0) // if new
-            {
-                if (files.Count > 0) 
-                {
-                    for(int i = 0; i < SiteObj.ImageUrls.Count; i++)
-                    {
-                        string fileName = Guid.NewGuid().ToString();
-                        var uploads = Path.Combine(webRootPath, @"images\sites");
-                        var extension = Path.GetExtension(files[0].FileName);
-                        var fullPath = Path.Combine(uploads, fileName + extension);
-
-                        using var fileStream = System.IO.File.Create(fullPath);
-                        files[0].CopyTo(fileStream);
-                        SiteObj.ImageUrls[i] = @"\images\SitePictures\" + fileName + extension;
-                    }
-                }
-
-                _unitOfWork.Site.Add(SiteObj);
-            }
-            else // existing
-            {
-
-
-                _unitOfWork.Site.Update(SiteObj);
-            }
-
+            // Save changes to the database
             _unitOfWork.Commit();
-            return RedirectToPage("./Index");
-        }
 
-        private void LoadSiteTypes()
-        {
-            var siteTypes = _unitOfWork.SiteType.List();
-            SiteTypeList = siteTypes.Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Name }).ToList();
+            // Redirect
+            return RedirectToPage("./Index");
         }
     }
 }

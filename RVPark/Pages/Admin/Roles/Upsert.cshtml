@@ -4,6 +4,8 @@
 }
 <div class="container border backgroundWhite">
     <form method="post">
+
+
         <input type="hidden" asp-for="CurrentRole.Id" />
 
         <div class="form-group">
@@ -11,17 +13,16 @@
             <input asp-for="CurrentRole.Name" class="form-control" />
             <span asp-validation-for="CurrentRole.Name" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="Description">Description</label>
-            <input asp-for="Description" class="form-control" />
+            <label asp-for="CurrentRole.Description">Description</label>
+            <input asp-for="CurrentRole.Description" class="form-control" />
+            <span asp-validation-for="CurrentRole.Description" class="text-danger"></span>
         </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
         <br />
         <button type="submit" class="btn btn-primary">
             @(Model.IsUpdate ? "Update" : "Create")
         </button>
     </form>
 </div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

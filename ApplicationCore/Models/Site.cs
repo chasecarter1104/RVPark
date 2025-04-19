@@ -22,8 +22,6 @@ namespace ApplicationCore.Models
         [Required]
         [Display(Name = "Site Description")]
         public string Description { get; set; } = "";
-        public List<string> ImageUrls { get; set; } = new List<string>();//-------------------------------------------an array of images
-
         public bool IsLocked { get; set; }
 
         [Required]
