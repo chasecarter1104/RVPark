@@ -1,5 +1,8 @@
 ﻿@page
 @model RVPark.Pages.Customer.Reservations.UpsertModel
+@using Infrastructure.Services
+@using Microsoft.Extensions.Options
+@inject IOptions<Infrastructure.Services.StripeSettings> Stripe
 
 <form method="post" asp-action="Upsert">
     <div class="container">
@@ -53,14 +56,23 @@
 	                <div class="col-9 offset-3">
 		                <div class="row">
 			                <div class="col-6">
-				                @if (Model.Reservation.Id != 0)
-				                {
-					                <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Update</button>
-				                }
-				                else
-				                {
-					                <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Reserve</button>
-				                }
+									@{
+                                        var OrderTotalForStripe = Math.Round((1.01 * 100), 0);
+									}
+									<script src="https://checkout.stripe.com/checkout.js"
+									class="stripe-button"
+									data-key="@Stripe.Value.PublishableKey"
+									data-amount="@OrderTotalForStripe"
+									data-name="RV Park Demo"
+									data-label="Make Reservation"
+									data-description="Enjoy your stay."
+									data-locale="auto"
+									data-allow-remember-me="false"
+									data-image="https://stripe.com/img/documentation/checkout/marketplace.png"></script>
+										
+									<script>document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';</script>
+									<button type="submit" id="btnPlaceOrder" onclick="return validateInput()" value="Place Order" class="btn btn-success form-control" asp-page="./Summary">Make Reservation</button>
+
 			                </div>
 			                <div class="col-6">
 				                <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
@@ -73,21 +85,9 @@
 		                <label>Total Price</label>
 	                </div>
 	                <div class="col-9">
-		                <input type="text" id="TotalPrice" class="form-control" readonly />
+		                <input type="text" id="TotalPrice" asp-for="Reservation" name="TotalPrice" class="form-control" readonly />
 	                </div>
                 </div>
-                <div class="form-group row">
-	                <div class="col-3">
-		                <label asp-for="Reservation.Fees">Fees</label>
-	                </div>
-	                <div class="col-9">
-		                @Html.ListBoxFor(m => m.Reservation.Fees,
-			                new MultiSelectList(Model.FeeList, "Value", "Text"),
-			                new { @class = "form-control", id = "Reservation_Fees" })
-		                <span class="text-danger" asp-validation-for="Reservation.Fees"></span>
-	                </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -105,6 +105,10 @@
         });
 
         document.getElementById("Reservation_EndDate").addEventListener("change", fetchAvailableSites);
+
+        document.getElementById("Reservation_SiteId").addEventListener("change", function() {
+	        calculateTotalPrice();
+        });
     });
 
     function fetchAvailableSites() {
@@ -127,6 +131,44 @@
                 .catch(error => console.error('Error fetching sites:', error));
         }
     }
+
+    function calculateTotalPrice() {
+	    // 1. Get the values
+	    const startDate = document.getElementById("Reservation_StartDate").value;
+	    const endDate = document.getElementById("Reservation_EndDate").value;
+	    const siteId = document.getElementById("Reservation_SiteId").value;
+
+	    // 2. Only calculate if we have all required values
+	    if (!startDate || !endDate || !siteId) {
+		    document.getElementById("TotalPrice").value = "$0.00";
+		    return;
+	    }
+
+	    // 3. Calculate days difference (INCLUSIVE)
+	    const start = new Date(startDate);
+	    const end = new Date(endDate);
+	    const diffDays = Math.floor((end - start) / (1000 * 60 * 60 * 24)) + 1;
+
+	    // 4. Get price and calculate total
+	    fetch(`/api/Reservation/SitePrice?siteId=${siteId}`)
+		    .then(response => response.json())
+		    .then(data => {
+			    const total = data.price * diffDays;
+			    document.getElementById("TotalPrice").value = `$${total.toFixed(2)}`;
+		    })
+		    .catch(error => {
+			    console.error("Failed to calculate price:", error);
+			    document.getElementById("TotalPrice").value = "$0.00";
+		    });
+    }
+
+    // Call this whenever ANY input changes
+    document.getElementById("Reservation_StartDate").addEventListener("change", calculateTotalPrice);
+    document.getElementById("Reservation_EndDate").addEventListener("change", calculateTotalPrice);
+    document.getElementById("Reservation_SiteId").addEventListener("change", calculateTotalPrice);
+
+    // Calculate immediately if editing existing reservation
+    calculateTotalPrice();
 
 
     tinymce.init({

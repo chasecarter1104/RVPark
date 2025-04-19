@@ -26,6 +26,7 @@ namespace RVPark.Pages.Customer.Reservations
         public IEnumerable<SelectListItem> UserList { get; set; }
         public IEnumerable<SelectListItem> FeeList { get; set; }
 
+        public float TotalCost { get; set; }
 
         public User User { get; set; }
 
@@ -76,7 +77,7 @@ namespace RVPark.Pages.Customer.Reservations
             _unitOfWork.Commit();
 
             // Redirect
-            return RedirectToPage("./Index");
+            return RedirectToPage();
         }
     }
 }
