@@ -15,14 +15,10 @@ namespace RVPark.Pages.Admin.Reservations
 
         [BindProperty]
         public Reservation Reservation { get; set; }
-        [BindProperty]
-        public List<int> SelectedFeeIds { get; set; } = new List<int>();
 
         // Creating these for a dropdown list
         public IEnumerable<SelectListItem> SiteList { get; set; }
         public IEnumerable<SelectListItem> UserList { get; set; }
-        public IEnumerable<SelectListItem> FeeList { get; set; }
-
         // Constructor injection
         public UpsertModel(UnitOfWork unitOfWork)
         {
@@ -33,7 +29,6 @@ namespace RVPark.Pages.Admin.Reservations
         {
             var sites = _unitOfWork.Site.List(); 
             var users = _unitOfWork.User.List(); 
-            var fees = _unitOfWork.Fee.List(); 
 
             if (id != null)
             {
@@ -47,28 +42,29 @@ namespace RVPark.Pages.Admin.Reservations
 
             SiteList = sites.Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Name }).ToList();
             UserList = users.Select(u => new SelectListItem { Text = u.FullName, Value = u.Id.ToString() }).ToList();
-            FeeList = fees.Select(f => new SelectListItem { Value = f.Id.ToString(), Text = f.Name }).ToList();
-
         }
 
         public IActionResult OnPost(int? id)
         {
-            if (Reservation.Id == 0)
+            if (id == null || Reservation.Id == 0)
             {
-                // Add new reservation to the database
+                // This should be a new reservation, but we want to avoid treating it as update
                 _unitOfWork.Reservation.Add(Reservation);
             }
             else
             {
                 // Update existing reservation
                 var objFromDb = _unitOfWork.Reservation.Get(r => r.Id == Reservation.Id, true);
-                _unitOfWork.Reservation.Update(Reservation);
+                if (objFromDb != null)
+                {
+                    _unitOfWork.Reservation.Update(Reservation);
+                }
             }
 
             // Save changes to the database
             _unitOfWork.Commit();
 
-            // Redirect
+            // Redirect to the list page
             return RedirectToPage("./Index");
         }
     }
