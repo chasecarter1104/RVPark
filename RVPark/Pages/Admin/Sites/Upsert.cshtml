@@ -42,32 +42,6 @@
 					</div>
 				</div>
 
-				<div class="form-group row">
-					<div class="col-3">
-						<label for="ImageFiles">Upload Images</label>
-					</div>
-					<div class="col-9">
-						<input type="file" id="ImageFiles" name="ImageFiles" class="form-control" multiple accept="image/*" />
-						<!--<span class="text-danger" asp-validation-for="ImageFiles"></span>-->
-					</div>
-				</div>
-
-				@if (Model.SiteObj.ImageUrls != null && Model.SiteObj.ImageUrls.Any())
-				{
-					<div class="form-group row py-3">
-						<div class="col-12">
-							<label>Existing Images</label>
-							<div class="row">
-								@foreach (var imageUrl in Model.SiteObj.ImageUrls)
-								{
-									<div class="col-3 p-2">
-										<img src="@imageUrl" class="img-thumbnail" style="width: 100%; border: 1px solid #bbb9b9;" />
-									</div>
-								}
-							</div>
-						</div>
-					</div>
-				}
 
 
 				<div class="form-group row py-3">

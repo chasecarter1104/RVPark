@@ -53,20 +53,7 @@ namespace RVPark.Pages.Admin.Sites
 
             if (SiteObj.Id == 0) // if new
             {
-                if (files.Count > 0) 
-                {
-                    for(int i = 0; i < SiteObj.ImageUrls.Count; i++)
-                    {
-                        string fileName = Guid.NewGuid().ToString();
-                        var uploads = Path.Combine(webRootPath, @"images\sites");
-                        var extension = Path.GetExtension(files[0].FileName);
-                        var fullPath = Path.Combine(uploads, fileName + extension);
 
-                        using var fileStream = System.IO.File.Create(fullPath);
-                        files[0].CopyTo(fileStream);
-                        SiteObj.ImageUrls[i] = @"\images\SitePictures\" + fileName + extension;
-                    }
-                }
 
                 _unitOfWork.Site.Add(SiteObj);
             }

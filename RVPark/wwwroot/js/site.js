@@ -25,16 +25,6 @@ function loadList() {
             { data: "maxLength", "render": $.fn.dataTable.render.number(',', '.', 2, '', ' ft'), width: "15%" },
             { data: "siteType.name" },
             { data: "description" },
-            {
-                data: "imageUrl",
-                render: function (data) {
-                    if (data && data.trim() !== "") {
-                        return `<img src="${data}" width="100" class="img-thumbnail" />`;
-                    }
-                    return "no image"; // Don't show anything if no image
-                },
-                width: "20%"
-            },
 
             {
                 data: "id", width: "30%",

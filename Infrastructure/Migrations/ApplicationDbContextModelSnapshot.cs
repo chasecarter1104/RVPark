@@ -118,10 +118,6 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.PrimitiveCollection<string>("ImageUrls")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsLocked")
                         .HasColumnType("bit");
 
