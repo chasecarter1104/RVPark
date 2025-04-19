@@ -50,24 +50,44 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-9 offset-3">
-                        <div class="row">
-                            <div class="col-6">
-                                @if (Model.Reservation.Id != 0)
-                                {
-                                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Update</button>
-                                }
-                                else
-                                {
-                                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
-                                }
-                            </div>
-                            <div class="col-6">
-                                <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
-                            </div>
-                        </div>
-                    </div>
+	                <div class="col-9 offset-3">
+		                <div class="row">
+			                <div class="col-6">
+				                @if (Model.Reservation.Id != 0)
+				                {
+					                <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Update</button>
+				                }
+				                else
+				                {
+					                <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Reserve</button>
+				                }
+			                </div>
+			                <div class="col-6">
+				                <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
+			                </div>
+		                </div>
+	                </div>
                 </div>
+                <div class="form-group row">
+	                <div class="col-3">
+		                <label>Total Price</label>
+	                </div>
+	                <div class="col-9">
+		                <input type="text" id="TotalPrice" class="form-control" readonly />
+	                </div>
+                </div>
+                <div class="form-group row">
+	                <div class="col-3">
+		                <label asp-for="Reservation.Fees">Fees</label>
+	                </div>
+	                <div class="col-9">
+		                @Html.ListBoxFor(m => m.Reservation.Fees,
+			                new MultiSelectList(Model.FeeList, "Value", "Text"),
+			                new { @class = "form-control", id = "Reservation_Fees" })
+		                <span class="text-danger" asp-validation-for="Reservation.Fees"></span>
+	                </div>
+                </div>
+
             </div>
         </div>
     </div>
