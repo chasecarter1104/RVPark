@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250419014809_Initial")]
-    partial class Initial
+    [Migration("20250419023722_FeeReservation")]
+    partial class FeeReservation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,10 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("ApplicationCore.Models.Fee", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<float>("FeeAmount")
                         .HasColumnType("real");
@@ -350,6 +353,21 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ReservationFee", b =>
+                {
+                    b.Property<int>("FeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReservationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FeeId", "ReservationId");
+
+                    b.HasIndex("ReservationId");
+
+                    b.ToTable("ReservationFee");
+                });
+
             modelBuilder.Entity("ApplicationCore.Models.User", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -363,15 +381,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("User");
-                });
-
-            modelBuilder.Entity("ApplicationCore.Models.Fee", b =>
-                {
-                    b.HasOne("ApplicationCore.Models.Reservation", null)
-                        .WithMany("Fees")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ApplicationCore.Models.Reservation", b =>
@@ -455,9 +464,19 @@ namespace Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ApplicationCore.Models.Reservation", b =>
+            modelBuilder.Entity("ReservationFee", b =>
                 {
-                    b.Navigation("Fees");
+                    b.HasOne("ApplicationCore.Models.Fee", null)
+                        .WithMany()
+                        .HasForeignKey("FeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ApplicationCore.Models.Reservation", null)
+                        .WithMany()
+                        .HasForeignKey("ReservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class FeeReservation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,6 +53,20 @@ namespace Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Fee",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FeeAmount = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fee", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -230,19 +244,24 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Fee",
+                name: "ReservationFee",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FeeAmount = table.Column<float>(type: "real", nullable: false)
+                    FeeId = table.Column<int>(type: "int", nullable: false),
+                    ReservationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Fee", x => x.Id);
+                    table.PrimaryKey("PK_ReservationFee", x => new { x.FeeId, x.ReservationId });
                     table.ForeignKey(
-                        name: "FK_Fee_Reservation_Id",
-                        column: x => x.Id,
+                        name: "FK_ReservationFee_Fee_FeeId",
+                        column: x => x.FeeId,
+                        principalTable: "Fee",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ReservationFee_Reservation_ReservationId",
+                        column: x => x.ReservationId,
                         principalTable: "Reservation",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -298,6 +317,11 @@ namespace Infrastructure.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ReservationFee_ReservationId",
+                table: "ReservationFee",
+                column: "ReservationId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Site_SiteTypeId",
                 table: "Site",
                 column: "SiteTypeId");
@@ -322,10 +346,13 @@ namespace Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Fee");
+                name: "ReservationFee");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Fee");
 
             migrationBuilder.DropTable(
                 name: "Reservation");

@@ -72,23 +72,22 @@
 				</div>
 				<div class="form-group row">
 					<div class="col-3">
+						<label>Fees</label>
+					</div>
+					<div class="col-9">
+						<select asp-for="SelectedFeeIds" asp-items="Model.FeeList" class="form-control" multiple></select>
+						<span class="text-danger" asp-validation-for="SelectedFeeIds"></span>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-3">
 						<label>Total Price</label>
 					</div>
 					<div class="col-9">
 						<input type="text" id="TotalPrice" class="form-control" readonly />
 					</div>
 				</div>
-				<div class="form-group row">
-					<div class="col-3">
-						<label asp-for="Reservation.Fees">Fees</label>
-					</div>
-					<div class="col-9">
-						@Html.ListBoxFor(m => m.Reservation.Fees,
-															new MultiSelectList(Model.FeeList, "Value", "Text"),
-															new { @class = "form-control", id = "Reservation_Fees" })
-						<span class="text-danger" asp-validation-for="Reservation.Fees"></span>
-					</div>
-				</div>
+
 			</div>
 		</div>
 </form>

@@ -24,7 +24,6 @@ namespace ApplicationCore.Models
         public virtual Site Site { get; set; }
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
-
-        public virtual ICollection<Fee> Fees { get; set; }
+        public ICollection<Fee> Fees { get; set; } = new List<Fee>();
     }
 }

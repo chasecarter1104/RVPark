@@ -15,6 +15,8 @@ namespace RVPark.Pages.Admin.Reservations
 
         [BindProperty]
         public Reservation Reservation { get; set; }
+        [BindProperty]
+        public List<int> SelectedFeeIds { get; set; } = new List<int>();
 
         // Creating these for a dropdown list
         public IEnumerable<SelectListItem> SiteList { get; set; }
