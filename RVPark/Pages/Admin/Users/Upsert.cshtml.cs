@@ -11,9 +11,9 @@ namespace RVPark.Pages.Admin.Users
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<Role> _roleManager;
 
-        public UpsertModel(UnitOfWork unitOfWork, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public UpsertModel(UnitOfWork unitOfWork, UserManager<IdentityUser> userManager, RoleManager<Role> roleManager)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
