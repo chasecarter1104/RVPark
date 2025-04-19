@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250419014809_Initial")]
-    partial class Initial
+    [Migration("20250419021745_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,10 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("ApplicationCore.Models.Fee", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<float>("FeeAmount")
                         .HasColumnType("real");
@@ -37,7 +40,12 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ReservationId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ReservationId");
 
                     b.ToTable("Fee");
                 });
@@ -369,9 +377,7 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("ApplicationCore.Models.Reservation", null)
                         .WithMany("Fees")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ReservationId");
                 });
 
             modelBuilder.Entity("ApplicationCore.Models.Reservation", b =>

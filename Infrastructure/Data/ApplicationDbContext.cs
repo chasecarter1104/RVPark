@@ -22,10 +22,10 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, Role, string
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Reservation>()
-            .HasMany(r => r.Fees)
-            .WithOne()
-            .HasForeignKey(f => f.Id);
+        //modelBuilder.Entity<Reservation>()
+        //    .HasMany(r => r.Fees)
+        //    .WithOne()
+        //    .HasForeignKey(f => f.Id);
 
         // Ensuring the Discriminator is set for the custom Role class
         modelBuilder.Entity<Role>()

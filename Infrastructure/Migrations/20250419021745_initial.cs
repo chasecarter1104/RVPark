@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -233,19 +233,20 @@ namespace Infrastructure.Migrations
                 name: "Fee",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FeeAmount = table.Column<float>(type: "real", nullable: false)
+                    FeeAmount = table.Column<float>(type: "real", nullable: false),
+                    ReservationId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fee", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Fee_Reservation_Id",
-                        column: x => x.Id,
+                        name: "FK_Fee_Reservation_ReservationId",
+                        column: x => x.ReservationId,
                         principalTable: "Reservation",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -286,6 +287,11 @@ namespace Infrastructure.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Fee_ReservationId",
+                table: "Fee",
+                column: "ReservationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservation_SiteId",
